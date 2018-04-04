@@ -1,0 +1,21 @@
+body {
+	background-size: cover;
+}
+
+.logoFooter {
+	pointer-events: none;
+}
+
+.ads {
+	width: 100%;
+}
+
+.adImages {
+	width: 250px;
+	height: 300px;
+}
+
+.cinemaImages {
+	width: 50%;
+	height: 50%;
+}

@@ -1,0 +1,9 @@
+.view {
+    transition: transform .2s;
+    margin: 0 auto;
+}
+
+.view:hover{
+    transform: scale(1.5);
+    filter: saturate(50%);
+}

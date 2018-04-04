@@ -1,0 +1,97 @@
+@font-face {
+    font-family: logoFont;
+    src: url(assets/fonts/Englebert-Regular.ttf);
+}
+
+@font-face {
+    font-family: navbarFont;
+    src: url(assets/fonts/Hagin-Caps-Medium.otf);
+}
+
+@font-face {
+    font-family: searchFont;
+    src: url(assets/fonts/Hagin-Caps-Thin.otf);
+}
+
+.logo {
+    font-family: logoFont;
+    font-size: 48px;
+}
+
+.navs {
+    font-family: navbarFont;
+    font-size: 26px;
+}
+
+.search {
+    font-family: searchFont;
+    font-size: 20px;
+}
+
+.movieHeader {
+    font-family: logoFont;
+    font-size: 36px;
+ }
+
+.navbar {
+ 	margin-bottom: 0;
+}
+
+.view {
+	transition: transform .2s;
+	margin: 0 auto;
+}
+
+.view:hover{
+    transform: scale(1.5);
+    filter: saturate(50%);
+}
+
+.navbar {
+    margin-bottom: 0;
+}
+
+.container-search {
+    margin-left: 570px;
+    width: auto;
+    text-align: center;
+}
+
+#hide {
+    width: 100%;
+    text-align: center;
+    margin-top: 20px;
+    display: none;
+}
+
+#toggleButton {
+    position:absolute;
+    text-align: center;
+}
+
+.adImages {
+    width: 250px;
+    height: 300px;
+}
+
+.cinemaImages {
+    width: 50%;
+    height: 50%;
+}
+
+a:link {
+    color:aliceblue;
+    text-decoration: none;
+}
+
+a:visited {
+    color:aliceblue;
+    text-decoration: none;
+}
+
+a:hover {
+    color:aliceblue;
+    cursor: pointer;
+    text-decoration: none;
+}
+
