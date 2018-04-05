@@ -12,6 +12,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.15.1/moment.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.7.14/js/bootstrap-datetimepicker.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.5/angular.min.js"></script>
 
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.7.14/css/bootstrap-datetimepicker.min.css">
@@ -47,6 +48,34 @@
     $('#datetimepicker1').datetimepicker({
       format: 'DD/MM/YYYY'
       });
+    });
+  </script>
+  <script>
+    var timeByCategory = {
+      xxi: ["10:00 - 12:30", "13:00 - 15:30", "16:00 - 18:30", "19:00 - 21:30", "22:00 - 00:30"],
+      cgv: ["10:10 - 12:40", "13:10 - 15:40", "16:10 - 18:40", "19:10 - 21:40", "22:10 - 00:40"],
+    }
+
+    function changetime(value) {
+      if (value.length == 0) document.getElementById("time").innerHTML = "<option></option>";
+      else {
+        var catOptions = "";
+        for (var categoryId in timeByCategory[value]) {
+          catOptions += "<option>" + timeByCategory[value][categoryId] + "</option>";
+        }
+        document.getElementById("time").innerHTML = catOptions;
+      }
+    }
+
+    var app = angular.module("myApp", []);
+    app.controller("myCtrl", function ($scope) {
+      $scope.seats = [
+        { "seatA": "A1", "seatB": "B1", "seatC": "C1", "seatD": "D1", "seatE": "E1" },
+        { "seatA": "A2", "seatB": "B2", "seatC": "C2", "seatD": "D2", "seatE": "E2" },
+        { "seatA": "A3", "seatB": "B3", "seatC": "C3", "seatD": "D3", "seatE": "E3" },
+        { "seatA": "A4", "seatB": "B4", "seatC": "C4", "seatD": "D4", "seatE": "E4" },
+        { "seatA": "A5", "seatB": "B5", "seatC": "C5", "seatD": "D5", "seatE": "E5" }
+      ]
     });
   </script>
 </body>

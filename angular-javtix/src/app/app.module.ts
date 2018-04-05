@@ -7,7 +7,7 @@ import { UserComponent } from './user/user.component';
 import { AppRoutingModule } from './/app-routing.module';
 import { HomeComponent } from './home/home.component';
 import { TeamComponent } from './team/team.component';
-
+import { MovieComponent } from './movie/movie.component';
 
 @NgModule({
   declarations: [
@@ -15,10 +15,11 @@ import { TeamComponent } from './team/team.component';
     UserComponent,
     HomeComponent,
     TeamComponent,
+    MovieComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
