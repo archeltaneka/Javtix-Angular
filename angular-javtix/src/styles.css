@@ -1,16 +1,30 @@
 @font-face {
     font-family: logoFont;
-    src: url(assets/fonts/Englebert-Regular.ttf);
+    src: url(assets/fonts/SIMPLIFICA.ttf);
 }
 
 @font-face {
     font-family: navbarFont;
-    src: url(assets/fonts/Hagin-Caps-Medium.otf);
+    src: url(assets/fonts/SIMPLIFICA.ttf);
 }
 
 @font-face {
     font-family: searchFont;
-    src: url(assets/fonts/Hagin-Caps-Thin.otf);
+    src: url(assets/fonts/SIMPLIFICA.ttf);
+}
+
+@font-face {
+    font-family: otherFont;
+    src: url(assets/fonts/SIMPLIFICA.ttf);
+}
+
+body {
+    background-color: #2A363B;
+}
+
+.header {
+    font-family: otherFont;
+    font-size: 36px;   
 }
 
 .logo {
@@ -95,3 +109,6 @@ a:hover {
     text-decoration: none;
 }
 
+#select {
+    color:black;
+}
