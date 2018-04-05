@@ -3,30 +3,22 @@ import { NgModule } from '@angular/core';
 
 
 import { AppComponent } from './app.component';
-import { BannerComponent } from './banner/banner.component';
-import { NavigationComponent } from './navigation/navigation.component';
-import { SearchbarComponent } from './searchbar/searchbar.component';
-import { NowShowingComponent } from './now-showing/now-showing.component';
-import { CinemasComponent } from './cinemas/cinemas.component';
-import { AdsComponent } from './ads/ads.component';
 import { UserComponent } from './user/user.component';
-import { MovieComponent } from './movie/movie.component';
+import { AppRoutingModule } from './/app-routing.module';
+import { HomeComponent } from './home/home.component';
+import { TeamComponent } from './team/team.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    BannerComponent,
-    NavigationComponent,
-    SearchbarComponent,
-    NowShowingComponent,
-    CinemasComponent,
-    AdsComponent,
     UserComponent,
-    MovieComponent
+    HomeComponent,
+    TeamComponent,
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    AppRoutingModule
   ],
   providers: [],
   bootstrap: [AppComponent]
