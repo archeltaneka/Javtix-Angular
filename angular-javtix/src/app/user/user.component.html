@@ -9,11 +9,10 @@
             <hr>
             <form>
                 <h5>Preferred Cinema</h5>
-                <input type="text" [(ngModel)]="signup.preferredCinema" require>
-                <!-- <select [(ngModel)]="signup.preferredCinema" name="preferredCinema" id="select">
+                <select *ngFor="let cinema of cinemaData" [(ngModel)]="signup.preferredCinema" name="preferredCinema" id="select">
                     <option value="" selected disabled>Select</option>
-                    <option *ngFor="" [attr.value]="n">Test1</option> 
-                </select> -->
+                    <option>{{cinema.cinema_name}}</option> 
+                </select>
                 <h5>Name</h5>
                 <input type="text" [(ngModel)]="signup.name" require>
                 <h5>Email</h5>
@@ -23,12 +22,11 @@
                 <h5>Phone Number</h5>
                 <input type="text" [(ngModel)]="signup.phoneNumber" require>
                 <h5>Gender</h5>
-                <input type="text" [(ngModel)]="signup.gender" require>
-                  <!-- <select [(ngModel)]="signup.gender" name="gender" id="select">
+                  <select [(ngModel)]="signup.gender" name="gender" id="select">
                     <option value="" selected disabled>Select</option>
-                    <option [attr.value]="male">Male</option>
-                    <option [attr.value]="female">Female</option>
-                  </select> -->
+                    <option value="male">Male</option>
+                    <option value="female">Female</option>
+                  </select>
                 <h5>Birthdate</h5>
                 <div class="container" id="select">
                   <div class="row">

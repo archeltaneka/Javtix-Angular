@@ -15,6 +15,9 @@ export class UserComponent implements OnInit {
 
   constructor(private allService: AllService) { }
 
+  cinemaData: Array<any>;
+  error: string;
+
   @Input() signup: Signup;
   response: Object = [];
   signUpFlag: boolean;
@@ -38,12 +41,17 @@ export class UserComponent implements OnInit {
   		() => console.log('Login success!')
   	);
   	this.signInFlag = true;
-  	setTimeout(() => window.location.href = "", 3600);
+  	setTimeout(() => window.location.href = "/dashboard", 3600);
   }
 
   ngOnInit() {
   	this.signup = new Signup();
   	this.signin = new Signin();
+
+  	this.allService.getAllCinemas().subscribe(
+  		datas => this.cinemaData = datas,
+  		error => this.error = error.statusText
+  	);
   }
 
 }

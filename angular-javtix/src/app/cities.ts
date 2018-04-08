@@ -1,3 +1,3 @@
 export class Cities {
-	cityName: string;
+	cityId: string;
 }

@@ -1,11 +1,11 @@
 <nav class="navbar navbar-inverse">
     <div class="container-fluid">
         <div class="navbar-header">
-            <a class="navbar-brand logo" href="Main.php">JAVTix</a>
+            <a class="navbar-brand logo" routerLink="/home">JAVTix</a>
         </div>
         <ul class="nav navbar-nav navs">
           <li class="view zoom">
-              <a href="#myCarousel"><span class="glyphicon glyphicon-home"></span></a>
+              <a routerLink="/home"><span class="glyphicon glyphicon-home"></span></a>
           </li>
           <li class="navs view zoom">
               <a href="#mov">Movies</a>
@@ -13,10 +13,18 @@
           <li class="navs view zoom">
               <a href="#toggleButton">Cinema</a>
           </li>
+          <li class="navs view zoom">
+              <a routerLink="/meet-the-team">Meet the team</a>
+          </li>
+        </ul>
+        <ul *ngIf="loggedIn" class="nav navbar-nav navbar-right navs">
+          <li>
+            <a class="btn btn-danger" role="button" (click)="logout()">Logout</a>
+          </li>
         </ul>
         <ul class="nav navbar-nav navbar-right navs view zoom">
             <li>
-                <a href="User.php">
+                <a href="/dashboard">
                     <span class="glyphicon glyphicon-user"></span> User</a>
             </li>
         </ul>

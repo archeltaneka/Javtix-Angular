@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import {Http, RequestOptions, Headers} from '@angular/http';
+//import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 import { Signup } from './signup';
 import { Signin } from './signin';
@@ -19,8 +20,9 @@ export class AllService {
 
   citiesResponse: any = {};
   schedulesResponse: any = {};
+  cinemasResponse: any = {};
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: Http) { }
 
   signUpService(signup: Signup) {
   	let url = 'http://localhost:8000/api/user';
@@ -67,6 +69,9 @@ export class AllService {
   	})
   }
 
+  getAllCinemas() {
+  	return this.http.get('http://localhost:8000/api/cinema').map(res=>res.json());
+  }
 
 
 }
