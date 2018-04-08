@@ -21,6 +21,7 @@ export class AllService {
   citiesResponse: any = {};
   schedulesResponse: any = {};
   cinemasResponse: any = {};
+  movieInfoResponse: any = {};
 
   constructor(private http: Http) { }
 
@@ -51,15 +52,6 @@ export class AllService {
   	})
   }
 
-  getAllCities() {
-  	return this.http.get('http://localhost:8000/api/...').map(res=>{
-  		console.log(res);
-
-  		this.citiesResponse = res;
-  		localStorage.setItem('citiesResponse', JSON.stringify(this.citiesResponse));
-  	})
-  }
-
   getAllSchedules(mov: Movies, city: Cities) {
   	return this.http.get('http://localhost:8000/api/...').map(res=> {
   		console.log(res);
@@ -73,5 +65,13 @@ export class AllService {
   	return this.http.get('http://localhost:8000/api/cinema').map(res=>res.json());
   }
 
+  getMovieInfo(mov: Movies) {
+  	return this.http.get('http://localhost:8000/api/movie/' + mov.movieId).map(res=> {
+  		console.log(res);
+
+  		this.movieInfoResponse = res;
+  		localStorage.setItem('movieInfoResponse', JSON.stringify(this.movieInfoResponse));
+  	});
+  }
 
 }
