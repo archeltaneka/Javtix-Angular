@@ -1,68 +1,70 @@
-<body style="background-color: #2A363B">
-    <div style="color:aliceblue; width:80%; position:relative; margin:auto">
-        <div class="tab" style="text-align:center">
-            <button class="tablinks" onclick="tabbed(event, 'SignUp')" style="color: black">Sign Up</button>
-            <button class="tablinks" onclick="tabbed(event, 'LogIn')" style="color: black">Log In</button>
-        </div>
-        <div id="SignUp" class="tabcontent">
-            <h3>Sign Up</h3>
-            <hr>
-            <form>
-                <h5>Preferred Cinema</h5>
-                <select *ngFor="let cinema of cinemaData" [(ngModel)]="signup.preferredCinema" name="preferredCinema" id="select">
-                    <option value="" selected disabled>Select</option>
-                    <option>{{cinema.cinema_name}}</option> 
+<body style="background-color: #2A363B" onload="this.tabbed(event, 'LogIn');">
+  <br>
+  <br>
+  <div style="color:aliceblue; width:80%; position:relative; margin:auto">
+      <div class="tab" style="text-align:center">
+          <button class="tablinks" onclick="tabbed(event, 'SignUp')" style="color: black">Sign Up</button>
+          <button class="tablinks" onclick="tabbed(event, 'LogIn')" style="color: black">Log In</button>
+      </div>
+      <div id="SignUp" class="tabcontent">
+          <h3>Sign Up</h3>
+          <hr>
+          <form>
+              <h5>Preferred Cinema</h5>
+              <select *ngFor="let cinema of cinemaData" [(ngModel)]="signup.preferredCinema" name="preferredCinema" id="select">
+                  <option value="" selected disabled>Select</option>
+                  <option>{{cinema.cinema_name}}</option> 
+              </select>
+              <h5>Name</h5>
+              <input type="text" [(ngModel)]="signup.name" require>
+              <h5>Email</h5>
+              <input type="email" [(ngModel)]="signup.email" require>
+              <h5>Password</h5>
+              <input type="password" [(ngModel)]="signup.password" require>
+              <h5>Phone Number</h5>
+              <input type="text" [(ngModel)]="signup.phoneNumber" require>
+              <h5>Gender</h5>
+                <select [(ngModel)]="signup.gender" name="gender" id="select">
+                  <option value="" selected disabled>Select</option>
+                  <option value="male">Male</option>
+                  <option value="female">Female</option>
                 </select>
-                <h5>Name</h5>
-                <input type="text" [(ngModel)]="signup.name" require>
-                <h5>Email</h5>
-                <input type="email" [(ngModel)]="signup.email" require>
-                <h5>Password</h5>
-                <input type="password" [(ngModel)]="signup.password" require>
-                <h5>Phone Number</h5>
-                <input type="text" [(ngModel)]="signup.phoneNumber" require>
-                <h5>Gender</h5>
-                  <select [(ngModel)]="signup.gender" name="gender" id="select">
-                    <option value="" selected disabled>Select</option>
-                    <option value="male">Male</option>
-                    <option value="female">Female</option>
-                  </select>
-                <h5>Birthdate</h5>
-                <div class="container" id="select">
-                  <div class="row">
-                    <div class='col-sm-6'>
-                      <div class="form-group">
-                        <div class='input-group date' id='datetimepicker1'>
-                          <input type='text' [(ngModel)]="signup.birthDate" class="form-control" />
-                          <span class="input-group-addon">
-                            <span class="glyphicon glyphicon-calendar"></span>
-                          </span>
-                        </div>
+              <h5>Birthdate</h5>
+              <div class="container" id="select">
+                <div class="row">
+                  <div class='col-sm-6'>
+                    <div class="form-group">
+                      <div class='input-group date' id='datetimepicker1'>
+                        <input type='text' [(ngModel)]="signup.birthDate" class="form-control" />
+                        <span class="input-group-addon">
+                          <span class="glyphicon glyphicon-calendar"></span>
+                        </span>
                       </div>
                     </div>
                   </div>
                 </div>
-                <h5>City</h5>
-                <input type="text" [(ngModel)]="signup.city" require>
-                  <!-- <select [(ngModel)]="signup.city" name="city" id="select">
-                    <option value="" selected disabled>Select</option>
-                    <option *ngFor="" [attr.value]="n">Test1</option>
-                  </select> -->
-                <br><br>
-                <input type="submit" value="Submit" (click)="register();" name="Submit" style="color:black; width:7%; position:relative; left:47%; background-color: grey; border: 2px solid black">
-            </form>
-        </div>
-        <div id="LogIn" class="tabcontent">
-            <h3>Log In</h3>
-            <hr>
-            <form action="">
-                <h5>Email</h5>
-                <input type="email" [(ngModel)]="signin.email" name="email" require>
-                <h5>Password</h5>
-                <input type="password" [(ngModel)]="signin.password" name="password" require>
-                <br><br>
-                <input type="submit" value="Submit" (click)="login();" name="Submit" style="color:black; width:7%; position:relative; left:47%; background-color: grey; border: 2px solid black">
-            </form>
-        </div>
-    </div>
+              </div>
+              <h5>City</h5>
+              <input type="text" [(ngModel)]="signup.city" require>
+                <!-- <select [(ngModel)]="signup.city" name="city" id="select">
+                  <option value="" selected disabled>Select</option>
+                  <option *ngFor="" [attr.value]="n">Test1</option>
+                </select> -->
+              <br><br>
+              <input type="submit" value="Submit" (click)="register();" name="Submit" style="color:black; width:7%; position:relative; left:47%; background-color: grey; border: 2px solid black">
+          </form>
+      </div>
+      <div id="LogIn" class="tabcontent">
+          <h3>Log In</h3>
+          <hr>
+          <form action="">
+              <h5>Email</h5>
+              <input type="email" [(ngModel)]="signin.email" name="email" require>
+              <h5>Password</h5>
+              <input type="password" [(ngModel)]="signin.password" name="password" require>
+              <br><br>
+              <input type="submit" value="Submit" (click)="login();" name="Submit" style="color:black; width:7%; position:relative; left:47%; background-color: grey; border: 2px solid black">
+          </form>
+      </div>
+  </div>
 </body>

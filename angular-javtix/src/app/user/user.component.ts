@@ -15,6 +15,23 @@ export class UserComponent implements OnInit {
 
   constructor(private allService: AllService) { }
 
+  private tabbed(evt, tab) {
+    var i, tabcontent, tablinks;
+
+    tabcontent = document.getElementsByClassName("tabcontent");
+    for (i = 0; i < tabcontent.length; i++) {
+      tabcontent[i].style.display = "none";
+    }
+
+    tablinks = document.getElementsByClassName("tablinks");
+    for (i = 0; i < tablinks.length; i++) {
+      tablinks[i].className = tablinks[i].className.replace("active", "");
+    }
+
+    document.getElementById(tab).style.display = "block";
+    evt.currentTarget.className += " active";
+  }
+
   cinemaData: Array<any>;
   error: string;
 
@@ -24,7 +41,6 @@ export class UserComponent implements OnInit {
 
   @Input() signin: Signin;
   signInFlag: boolean;
-
 
   register() {
   	this.allService.signUpService(this.signup).subscribe(
@@ -51,7 +67,9 @@ export class UserComponent implements OnInit {
   	this.allService.getAllCinemas().subscribe(
   		datas => this.cinemaData = datas,
   		error => this.error = error.statusText
-  	);
+    );
+    
+    this.tabbed(event, 'LogIn');
   }
 
 }
