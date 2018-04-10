@@ -3,11 +3,11 @@
         <table cellspacing="10" style="position:relative; left:25%"> 
             <tr> 
                 <td> 
-                    <img src="../assets/images/Mov5.jpg"> 
+                    <img src="{{ mov[0].image_url }}"> 
                 </td> 
                 <td> 
-                    <iframe width="500" height="350" src="https://www.youtube.com/embed/gCcx85zbxz4"> 
-                    </iframe> 
+                    <!-- <iframe width="500" height="350" src="{{ mov[0].trailer_url }}"> 
+                    </iframe>  -->
                 </td> 
             </tr> 
         </table> 
@@ -15,9 +15,19 @@
         <table style="position:relative; left:25%; color:aliceblue"> 
             <tr> 
                 <td style="width:750px"> 
-                	{{ informations.movie_name }}
+                	<h2>{{ mov[0].movie_name }}</h2>
                 	<br>
-                    {{ informations.synopsis }}
+                    {{ mov[0].synopsis }}
+                    <br>
+                    <br>
+                    Director: {{ mov[0].director }}
+                    <br>
+                    Stars: {{ mov[0].casts }}
+                    <br>
+                    <br>
+                    Duration: {{ mov[0].duration }} minutes
+                    <br>
+                    Rating: {{ mov[0].rating }}
                 </td> 
             </tr> 
         </table> 
@@ -32,11 +42,11 @@
                         </th> 
                     </tr> 
                     <tr> 
-                        <td style="text-align:center"> 
-                            10:00 - 12:30 
+                        <td *ngFor="let info of movieInfo" style="text-align:center"> 
+                            {{info.time}} 
                         </td> 
                     </tr> 
-                    <tr> 
+                    <!-- <tr> 
                         <td style="text-align:center"> 
                             13:00 - 15:30 
                         </td> 
@@ -55,7 +65,7 @@
                         <td style="text-align:center"> 
                             22:00 - 00:30 
                         </td> 
-                    </tr> 
+                    </tr>  -->
                 </table> 
             </div> 
             <div class="col-sm-6"> 
@@ -93,7 +103,7 @@
                 </table> 
             </div> 
         </div> 
-        <div style="text-align:center"> 
+        <!-- <div style="text-align:center"> 
             <h3>Interested?</h3> 
             <form> 
                 <h5>Number of People</h5> 
@@ -128,7 +138,7 @@
                 <br> 
                 <input type="submit" value="Submit" name="Submit" style="color:black; width:7%; position:absolute; left:46.5%; background-color: grey; border: 2px solid black"> 
             </form> 
-        </div> 
+        </div>  -->
     </div> 
     <br> 
     <footer> 

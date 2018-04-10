@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { AllService } from '../all.service';
 import { HttpClient } from '@angular/common/http';
 
+import { ActivatedRoute, Router } from '@angular/router';
+
 import { Movies } from '../Movies';
 
 @Component({
@@ -11,17 +13,31 @@ import { Movies } from '../Movies';
 })
 export class MovieComponent implements OnInit {
 
-  constructor(private http: HttpClient, private service: AllService) { }
+  constructor(private http: HttpClient, private service: AllService, private route: ActivatedRoute, private router: Router) { }
 
-  mov: Movies;
+  mov: any = {};
   tid: any;
 
-  informations: Array<any>;
+  movieInfo: any = {};
   error: string;
 
   ngOnInit() {
-  	this.mov.movieId = JSON.parse(localStorage.getItem('movieInfoResponse'));
-  	this.service.getMovieInfo(this.mov).subscribe();
+  	this.route.params.subscribe(res=>{
+  		this.http.get(`http://localhost:8000/api/movie/${res['id']}`).subscribe(res2=>{
+  			this.mov = res2;
+  			console.log(this.mov);
+  		})
+  	})
+
+  	this.service.getAllSchedules().subscribe(
+  		info => {
+  			this.movieInfo = info;
+  			console.log(info);
+  		},
+  		error => {
+  			this.error = error.statusText;
+  		}
+  	);
   }
 
 }

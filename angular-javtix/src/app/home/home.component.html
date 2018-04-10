@@ -9,29 +9,29 @@
 	    </ol>
 
 	    <div class="carousel-inner">
-	        <div class="item active" align="middle" style="height:650px">
+	        <div class="item active" align="middle" style="height:700px">
 	            <img src="../assets/images/Mov1.jpg" style="width:110%; position:absolute; top:-30%">
 	            <div class="carousel-caption">
 	                <h3>Star Wars: The New Hope</h3>
 	            </div>
 	        </div>
 
-	        <div class="item" align="middle" style="height:650px">
+	        <div class="item" align="middle" style="height:700px;">
 	            <img src="../assets/images/Mov2.jpg" style="width:120%; position:absolute; top:-80%">
 	            <div class="carousel-caption">
 	                <h3>Star Wars: The Empire Strikes Back</h3>
 	            </div>
 	        </div>
 
-	        <div class="item" align="middle" style="height:650px">
+	        <div class="item" align="middle" style="height:700px">
 	            <img src="../assets/images/Mov3.jpg" style="width: 120%; position:absolute; top:-90%">
 	            <div class="carousel-caption">
 	                <h3>Star Wars: Revenge of the Jedi</h3>
 	            </div>
 	        </div>
 
-	        <div class="item" align="middle" style="height:650px">
-	            <img src="../assets/images/Mov4.jpg" style="width: 120%; position:absolute; top:-30%">
+	        <div class="item" align="middle" style="height:700px">
+	            <img src="../assets/images/Mov4.jpg" style="width: 120%; position:absolute; top:-20%">
 	            <div class="carousel-caption">
 	                <h3>Back From the Future</h3>
 	            </div>
@@ -49,78 +49,57 @@
 	</div>
 
 	<nav class="navbar navbar-inverse">
-	  <div class="container-search">
-	    <ul class="nav navbar-nav">
-	      <li class="nav-item dropdown search">
-	       <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-	         Select Movie...
-	       </a>
-	       <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-	         <a class="dropdown-item" href="#">Action</a>
-	         <a class="dropdown-item" href="#">Another action</a>
-	         <a class="dropdown-item" href="#">Something else here</a>
-	       </div>
-	     </li>
-	     <li class="nav-item dropdown search">
-	      <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-	        Select City...
-	      </a>
-	      <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-	        <a class="dropdown-item" href="#">Action</a>
-	        <a class="dropdown-item" href="#">Another action</a>
-	        <a class="dropdown-item" href="#">Something else here</a>
-	      </div>
-	    </li>
-	      <li>
-	        <a href="#" class="btn view zoom"><span class="glyphicon glyphicon-search">Search</span></a>
-	      </li>
-	    </ul>
-	  </div>
+	   <div class="col-sm-1 dropdown">
+            <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Select Movie...
+            <span class="caret"></span></button>
+            <ul class="dropdown-menu">
+                <li *ngFor="let movie of movies"><a href="#">{{movie.movie_name}}</a></li>
+            </ul>
+        </div>
+        <div class="col-sm-1 dropdown">
+            <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Select City...
+            <span class="caret"></span></button>
+            <ul class="dropdown-menu">
+                <li *ngFor="let movie of movies"><a href="#">{{movie.movie_name}}</a></li>
+            </ul>
+        </div>
+        <div class="col-sm-1">
+            <button><span class="glyphicon glyphicon-search"></span>Search</button>
+        </div>
 	</nav>
 
 	<div style="color:aliceblue">
 	    <h2 id="mov" class="movieHeader" style="text-align:center">Now Playing</h2>
 	    <hr>
 	    <div class="row" style="width:100%" align="center">
-	        <div class="col-sm-3">
-	            <a routerLink="/movie"><img src="../assets/images/Mov5.jpg" class="view"></a>
+	        <div *ngFor="let movie of movies" class="col-sm-3">
+	            <button (click)="viewMovieInfo(movie.id)"><img src="{{movie.image_url}}" class="view"></button>
 	        </div>
-	        <div class="col-sm-3">
-	            <a href="Movie2.php"><img src="../assets/images/Mov6.jpg" class="view"></a>
-	        </div>
-	        <div class="col-sm-3">
-	            <a href="Movie3.php"><img src="../assets/images/Mov7.jpg" class="view"></a>
-	        </div>
-	        <div class="col-sm-3">
-	            <a href="Movie4.php"><img src="../assets/images/Mov8.jpg" class="view"></a>
-	        </div>
-	        <br>
 	    <br>
-    </div>
-    <div class="collapse" id="more" style="padding:10pt 0pt 0pt 0pt">
-        <div class="row" style="width:100%" align="center">
-            <div class="col-sm-3">
-                <a href="Movie5.php"><img src="../assets/images/Mov9.jpg" class="view"></a>
-            </div>
-            <div class="col-sm-3">
-                <a href="Movie6.php"><img src="../assets/images/Mov10.jpg" class="view"></a>
-            </div>
-            <div class="col-sm-3">
-                <a href="Movie7.php"><img src="../assets/images/Mov11.jpg" class="view"></a>
-            </div>
-            <div class="col-sm-3">
-                <a href="Movie8.php"><img src="../assets/images/Mov12.jpg" class="view"></a>
+        </div>
+       <!--  <div class="collapse" id="more" style="padding:10pt 0pt 0pt 0pt">
+            <div class="row" style="width:100%" align="center">
+                <div class="col-sm-3">
+                    <a href="Movie5.php"><img src="../assets/images/Mov9.jpg" class="view"></a>
+                </div>
+                <div class="col-sm-3">
+                    <a href="Movie6.php"><img src="../assets/images/Mov10.jpg" class="view"></a>
+                </div>
+                <div class="col-sm-3">
+                    <a href="Movie7.php"><img src="../assets/images/Mov11.jpg" class="view"></a>
+                </div>
+                <div class="col-sm-3">
+                    <a href="Movie8.php"><img src="../assets/images/Mov12.jpg" class="view"></a>
+                </div>
             </div>
         </div>
-    </div>
     <br>
     <div class="text-center">
       <a class="btn btn-primary" role="button" data-toggle="collapse" href="#more">
         See more
       </a>
-    </div>
-    <!-- JANGAN LUPA INI MAU DIGANTI -->
-    <!-- <a id="toggleButton" class="btn btn-secondary" role="button" onclick="Show()" href="javascript:void(0);">See More</a> -->
+    </div> -->
+
     <h2 id="mov" class="movieHeader" style="text-align:center">Coming Soon</h2>
     <hr>
     <div class="row" style="width:100%" align="center">
@@ -171,9 +150,9 @@
             <a href="https://www.facebook.com/CinemaXXI?ref=ts&fref=ts" target="_blank"><img src="../assets/images/XXI.png" class="view cinemaImages"></a>
         </div>
     </div>
+    <hr>
     <br>
     <h2 id="ads" class="header" style="text-align:center">Ads</h2>
-    <hr>
     <br>
     <br>
     <div id="myCarousel" class="carousel slide" data-ride="carousel" style="width:101%">
@@ -186,18 +165,18 @@
 
         <div class="carousel-inner">
             <div class="item active" align="middle">
-                <img src="../assets/images/ad1.png" class="adImages">
+                <img src="https://i.imgur.com/rDCoJrD.png" class="adImages">
             </div>
 
             <div class="item" align="middle">
-                <img src="../assets/images/ad2.png" class="adImages">
+                <img src="https://i.imgur.com/DPOVe3g.png" class="adImages">
             </div>
             <div class="item" align="middle">
-                <img src="../assets/images/ad3.png" class="adImages">
+                <img src="https://i.imgur.com/cNnHyPt.png" class="adImages">
             </div>
 
             <div class="item" align="middle">
-                <img src="../assets/images/ad4.png" class="adImages">
+                <img src="https://i.imgur.com/1suqZnV.png" class="adImages">
             </div>
         </div>
 
@@ -211,9 +190,8 @@
         </a>
     </div>
     <router-outlet></router-outlet>
-    <br>
-    <br>
-    <footer class="header" style="text-align:center">
+    <hr style="width:101%">
+    <footer>
       COPYRIGHT 2018. JAVTix ALL RIGHTS RESERVED.
     </footer>
 </div>

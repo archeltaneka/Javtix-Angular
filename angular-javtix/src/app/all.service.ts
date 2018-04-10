@@ -1,7 +1,9 @@
 import { Injectable } from '@angular/core';
 
-import {Http, RequestOptions, Headers} from '@angular/http';
-//import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Http, RequestOptions, Headers } from '@angular/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+
+import { Router } from '@angular/router';
 
 import { Signup } from './signup';
 import { Signin } from './signin';
@@ -14,6 +16,7 @@ import 'rxjs/add/operator/map';
 export class AllService {
 
   token: any = {};
+  data: any = {};
   name: any = {};
   email: any = {};
   phoneNumber: any = {};
@@ -23,7 +26,11 @@ export class AllService {
   cinemasResponse: any = {};
   movieInfoResponse: any = {};
 
-  constructor(private http: Http) { }
+  header = {
+  	headers: new HttpHeaders({'Content-Type': 'application/json'})
+  };
+
+  constructor(private http: Http, private httpClient: HttpClient, private router: Router) { }
 
   signUpService(signup: Signup) {
   	let url = 'http://localhost:8000/api/user';
@@ -32,46 +39,58 @@ export class AllService {
 
   signinService(signin: Signin) {
   	let response: any = {};
-  	let url = 'http://localhost:8000/api/...';
+  	let url = 'http://localhost:8000/api/user';
 
-  	return this.http.post(url, signin).map(res=> {
-  		console.log(res);
-  		response = res;
+  	return this.httpClient.post<any>(url, signin, this.header).subscribe(
+  		res => {
+  			console.log(res);
+  			this.data = res;
+  			this.name = JSON.parse(atob(this.data.access_token.split('.')[1])).name;
 
-  		localStorage.setItem('response', JSON.stringify(response));
-  		this.token = JSON.parse(localStorage.getItem('response')).data.token;
-  		this.name = JSON.parse(localStorage.getItem('response')).data.user["0"].name;
-  		this.email = JSON.parse(localStorage.getItem('response')).data.user["0"].email;
-  		this.phoneNumber = JSON.parse(localStorage.getItem('response')).data.user["0"].phoneNumber;
+  			localStorage.setItem('token', this.data.access_token);
+  			localStorage.setItem('name', this.name);
 
-  		localStorage.setItem('name', this.name);
-  		localStorage.setItem('email', this.email);
-  		localStorage.setItem('phoneNumber', this.phoneNumber);
+  			this.router.navigate(['/dashboard']);
+  		},
+  		err => {
+  			let error = err.error;
+  			console.log(error);
+  		},
+  		() => alert('Welcome back!')
+  		);
 
-  		console.log(localStorage['token']);
-  	})
+  	// return this.http.post(url, signin).map(res=> {
+  	// 	console.log(res);
+  	// 	response = res;
+
+  	// 	localStorage.setItem('response', JSON.stringify(response));
+  	// 	this.token = JSON.parse(localStorage.getItem('response')).data.token;
+  	// 	this.name = JSON.parse(localStorage.getItem('response')).data.user["0"].name;
+  	// 	this.email = JSON.parse(localStorage.getItem('response')).data.user["0"].email;
+  	// 	this.phoneNumber = JSON.parse(localStorage.getItem('response')).data.user["0"].phoneNumber;
+
+  	// 	localStorage.setItem('name', this.name);
+  	// 	localStorage.setItem('email', this.email);
+  	// 	localStorage.setItem('phoneNumber', this.phoneNumber);
+
+  	// 	console.log(localStorage['token']);
+  	// })
   }
 
-  getAllSchedules(mov: Movies, city: Cities) {
-  	return this.http.get('http://localhost:8000/api/...').map(res=> {
-  		console.log(res);
-
-  		this.schedulesResponse = res;
-  		localStorage.setItem('schedulesResponse', JSON.stringify(this.schedulesResponse));
-  	})
+  getAllSchedules() {
+  	return this.http.get('http://localhost:8000/api/schedule').map(res=>res.json());
   }
 
   getAllCinemas() {
   	return this.http.get('http://localhost:8000/api/cinema').map(res=>res.json());
   }
 
-  getMovieInfo(mov: Movies) {
-  	return this.http.get('http://localhost:8000/api/movie/' + mov.movieId).map(res=> {
-  		console.log(res);
+  getAllMovies() {
+  	return this.http.get('http://localhost:8000/api/movie').map(res=>res.json());
+  }
 
-  		this.movieInfoResponse = res;
-  		localStorage.setItem('movieInfoResponse', JSON.stringify(this.movieInfoResponse));
-  	});
+  getAllCities() {
+  	return this.http.get('http://localhost:8000/api/cinema').map(res=>res.json());
   }
 
 }

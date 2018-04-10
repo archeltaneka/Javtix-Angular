@@ -13,51 +13,38 @@ import { Signin } from '../signin';
 })
 export class UserComponent implements OnInit {
 
-  constructor(private allService: AllService) { }
-
-  private tabbed(evt, tab) {
-    var i, tabcontent, tablinks;
-
-    tabcontent = document.getElementsByClassName("tabcontent");
-    for (i = 0; i < tabcontent.length; i++) {
-      tabcontent[i].style.display = "none";
-    }
-
-    tablinks = document.getElementsByClassName("tablinks");
-    for (i = 0; i < tablinks.length; i++) {
-      tablinks[i].className = tablinks[i].className.replace("active", "");
-    }
-
-    document.getElementById(tab).style.display = "block";
-    evt.currentTarget.className += " active";
-  }
+  constructor(private http: Http, private allService: AllService) { }
 
   cinemaData: Array<any>;
   error: string;
 
-  @Input() signup: Signup;
+  cityData: Array<any>;
+  cityError: string;
+
+  signup: any = {};
   response: Object = [];
   signUpFlag: boolean;
+  test: any;
 
-  @Input() signin: Signin;
+  signin: any = {};
   signInFlag: boolean;
 
-  register() {
-  	this.allService.signUpService(this.signup).subscribe(
+  public model: any = {};
+
+
+  register(data: any) {
+  	console.log(data);
+  	this.allService.signUpService(data).subscribe(
   		data => console.log(this.response = data),
-  		err => console.log(err),
-  		() => console.log('Sign up success!')
+  		err => alert(err),
+  		() => alert('Sign up success! Please check your email for verification')
   	);
   	this.signUpFlag = true;
   	setTimeout(() => window.location.href = "", 3600);
   }
 
   login() {
-  	this.allService.signinService(this.signin).subscribe(
-  		() => console.log('Login success!')
-  	);
-  	this.signInFlag = true;
-  	setTimeout(() => window.location.href = "/dashboard", 3600);
+  	this.allService.signinService(this.model);
   }
 
   ngOnInit() {
@@ -67,9 +54,12 @@ export class UserComponent implements OnInit {
   	this.allService.getAllCinemas().subscribe(
   		datas => this.cinemaData = datas,
   		error => this.error = error.statusText
-    );
-    
-    this.tabbed(event, 'LogIn');
+  	);
+
+  	this.allService.getAllCinemas().subscribe(
+  		cities => this.cityData = cities,
+  		error => this.cityError = error.statusText
+  	);
   }
 
 }
