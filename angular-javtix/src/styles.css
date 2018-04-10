@@ -22,6 +22,10 @@ body {
     background-color: #2A363B;
 }
 
+footer {
+    text-align: center;
+}
+
 .header {
     font-family: otherFont;
     font-size: 36px;   
@@ -93,6 +97,11 @@ body {
     height: 50%;
 }
 
+.dropdown-item {
+    font-size: 18px;
+    color: black;
+}
+
 a:link {
     color:aliceblue;
     text-decoration: none;
@@ -107,6 +116,10 @@ a:hover {
     color:aliceblue;
     cursor: pointer;
     text-decoration: none;
+}
+
+li:hover {
+    cursor: pointer;
 }
 
 #select {

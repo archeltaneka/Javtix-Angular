@@ -29,22 +29,29 @@ export class UserComponent implements OnInit {
   signin: any = {};
   signInFlag: boolean;
 
-  public model: any = {};
+  public model: Signin;
 
 
-  register(data: any) {
-  	console.log(data);
-  	this.allService.signUpService(data).subscribe(
-  		data => console.log(this.response = data),
-  		err => alert(err),
-  		() => alert('Sign up success! Please check your email for verification')
-  	);
-  	this.signUpFlag = true;
-  	setTimeout(() => window.location.href = "", 3600);
+  register() {
+  	this.allService.signUpService(this.signup);
+  	console.log(this.signup);
+  	alert("Register success! Please check your email for verification");
+  	// console.log(data);
+  	// this.allService.signUpService(data).subscribe(
+  	// 	data => console.log(this.response = data),
+  	// 	err => alert(err),
+  	// 	() => alert('Sign up success! Please check your email for verification')
+  	// );
+  	// this.signUpFlag = true;
+  	// setTimeout(() => window.location.href = "", 3600);
   }
 
   login() {
-  	this.allService.signinService(this.model);
+  	this.allService.signinService(this.model).subscribe(
+  		() => console.log('Login success!')
+  	);
+  	this.signInFlag = true;
+  	setTimeout(() => window.location.href= "/dashboard", 2000);
   }
 
   ngOnInit() {

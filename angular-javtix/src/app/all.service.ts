@@ -20,6 +20,10 @@ export class AllService {
   name: any = {};
   email: any = {};
   phoneNumber: any = {};
+  preferredCinema: any = {};
+  gender: any = {};
+  birthDate: any = {};
+  city: any = {};
 
   citiesResponse: any = {};
   schedulesResponse: any = {};
@@ -33,48 +37,54 @@ export class AllService {
   constructor(private http: Http, private httpClient: HttpClient, private router: Router) { }
 
   signUpService(signup: Signup) {
-  	let url = 'http://localhost:8000/api/user';
-  	return this.http.post(url, signup).map(res=>res);
+  	let url = 'http://localhost:8000/api/register';
+  	this.httpClient.post(url, signup, this.header).subscribe(
+  		res => console.log("Register success!"),
+  		err => console.log(err.error)
+  	);
+  	// return this.httpClient.post<any>(url, signup, this.header).map(res=>res);
   }
 
   signinService(signin: Signin) {
   	let response: any = {};
-  	let url = 'http://localhost:8000/api/user';
+  	let url = 'http://localhost:8000/api/login';
 
-  	return this.httpClient.post<any>(url, signin, this.header).subscribe(
-  		res => {
-  			console.log(res);
-  			this.data = res;
-  			this.name = JSON.parse(atob(this.data.access_token.split('.')[1])).name;
+  	// return this.httpClient.post<any>(url, signin, this.header).subscribe(
+  	// 	res => {
+  	// 		console.log(res);
+  	// 		this.data = res;
+  	// 		this.name = JSON.parse(atob(this.data.access_token.split('.')[1])).name;
 
-  			localStorage.setItem('token', this.data.access_token);
-  			localStorage.setItem('name', this.name);
+  	// 		localStorage.setItem('token', this.data.access_token);
+  	// 		localStorage.setItem('name', this.name);
 
-  			this.router.navigate(['/dashboard']);
-  		},
-  		err => {
-  			let error = err.error;
-  			console.log(error);
-  		},
-  		() => alert('Welcome back!')
-  		);
+  	// 		this.router.navigate(['/dashboard']);
+  	// 	},
+  	// 	err => {
+  	// 		let error = err.error;
+  	// 		console.log(error);
+  	// 	},
+  	// 	() => alert('Welcome back!')
+  	// 	);
 
-  	// return this.http.post(url, signin).map(res=> {
-  	// 	console.log(res);
-  	// 	response = res;
+  	return this.http.post(url, signin).map(res=> {
+  		console.log(res);
+  		response = res;
 
-  	// 	localStorage.setItem('response', JSON.stringify(response));
-  	// 	this.token = JSON.parse(localStorage.getItem('response')).data.token;
-  	// 	this.name = JSON.parse(localStorage.getItem('response')).data.user["0"].name;
-  	// 	this.email = JSON.parse(localStorage.getItem('response')).data.user["0"].email;
-  	// 	this.phoneNumber = JSON.parse(localStorage.getItem('response')).data.user["0"].phoneNumber;
+  		localStorage.setItem('response', JSON.stringify(response));
+  		this.token = JSON.parse(localStorage.getItem('response')).data.token;
+  		this.name = JSON.parse(localStorage.getItem('response')).data.user["0"].name;
+  		this.email = JSON.parse(localStorage.getItem('response')).data.user["0"].email;
+  		this.phoneNumber = JSON.parse(localStorage.getItem('response')).data.user["0"].phoneNumber;
 
-  	// 	localStorage.setItem('name', this.name);
-  	// 	localStorage.setItem('email', this.email);
-  	// 	localStorage.setItem('phoneNumber', this.phoneNumber);
-
-  	// 	console.log(localStorage['token']);
-  	// })
+  		localStorage.setItem('preferredCinema', this.preferredCinema);
+  		localStorage.setItem('name', this.name);
+  		localStorage.setItem('email', this.email);
+  		localStorage.setItem('phoneNumber', this.phoneNumber);
+  		localStorage.setItem('gender', this.gender);
+  		localStorage.setItem('birthDate', this.birthDate);
+  		localStorage.setItem('city', this.city);
+  	})
   }
 
   getAllSchedules() {
@@ -87,6 +97,10 @@ export class AllService {
 
   getAllMovies() {
   	return this.http.get('http://localhost:8000/api/movie').map(res=>res.json());
+  }
+
+  getMovieFromSearch(mov: any) {
+  	return this.http.get('https://localhost:8000/api/movie/' + mov.id).map(res=>res.json());
   }
 
   getAllCities() {

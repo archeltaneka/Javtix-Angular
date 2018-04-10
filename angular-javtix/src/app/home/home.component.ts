@@ -14,8 +14,11 @@ export class HomeComponent implements OnInit {
 
   constructor(private http: HttpClient, private service: AllService, private router: Router) { }
 
-  movies: any = {};
+  movies: Array<any>;
   error: string;
+
+  movieSearchData: any = {};
+  movieSearchError: string;
 
   ngOnInit() {
   	this.service.getAllMovies().subscribe(
@@ -32,6 +35,20 @@ export class HomeComponent implements OnInit {
   viewMovieInfo(mid: any) {
   	console.log(mid);
   	this.router.navigate([`/movie/${mid}`]);
+  }
+
+  getMovieClick(mid: any) {
+  	console.log(mid);
+  	this.service.getMovieFromSearch(mid).subscribe(
+  		data => {
+  			this.movieSearchData = data;
+  			console.log(data);
+  		},
+  		error => {
+  			console.log(error.statusText);
+  			this.movieSearchError = error.statusText
+  		}
+  	);
   }
 
 }

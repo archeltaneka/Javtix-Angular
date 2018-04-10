@@ -18,7 +18,7 @@ export class MovieComponent implements OnInit {
   mov: any = {};
   tid: any;
 
-  movieInfo: any = {};
+  movieInfo: Array<any>;
   error: string;
 
   ngOnInit() {
@@ -39,5 +39,5 @@ export class MovieComponent implements OnInit {
   		}
   	);
   }
-
+  
 }

@@ -12,7 +12,7 @@ export class NavigationComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-  	this.loggedIn = localStorage.getItem('token') ? true : false;
+  	this.loggedIn = localStorage.getItem('response') ? true : false;
   }
 
   logout() {
