@@ -7,7 +7,7 @@
         <div id="SignUp" class="tabcontent">
             <h3>Sign Up</h3>
             <hr>
-            <form method="post" (submit)="register(signup)">
+            <form method="post" (submit)="register()">
                 <h5>Preferred Cinema</h5>
                 <select *ngFor="let cinema of cinemaData" [(ngModel)]="signup.preferred_cinema_id" name="preferredCinema" id="select">
                     <option selected disabled>Select</option>

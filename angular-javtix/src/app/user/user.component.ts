@@ -26,37 +26,30 @@ export class UserComponent implements OnInit {
   signUpFlag: boolean;
   test: any;
 
-  signin: any = {};
+  public model: any = {};
   signInFlag: boolean;
-
-  public model: Signin;
 
 
   register() {
   	this.allService.signUpService(this.signup);
   	console.log(this.signup);
   	alert("Register success! Please check your email for verification");
-  	// console.log(data);
-  	// this.allService.signUpService(data).subscribe(
-  	// 	data => console.log(this.response = data),
-  	// 	err => alert(err),
-  	// 	() => alert('Sign up success! Please check your email for verification')
-  	// );
-  	// this.signUpFlag = true;
-  	// setTimeout(() => window.location.href = "", 3600);
   }
 
   login() {
   	this.allService.signinService(this.model).subscribe(
-  		() => console.log('Login success!')
+  		res => {
+  			console.log('Login success');
+  			this.signInFlag = true;
+  			setTimeout(() => window.location.href="/dashboard", 2000);
+  		},
+  		err => alert(err.Error)
   	);
-  	this.signInFlag = true;
-  	setTimeout(() => window.location.href= "/dashboard", 2000);
   }
 
   ngOnInit() {
   	this.signup = new Signup();
-  	this.signin = new Signin();
+  	this.model = new Signin();
 
   	this.allService.getAllCinemas().subscribe(
   		datas => this.cinemaData = datas,

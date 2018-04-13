@@ -102,6 +102,12 @@ footer {
     color: black;
 }
 
+#profile {
+    text-align: center;
+    width: auto;
+    margin-left: 30px;
+}
+
 a:link {
     color:aliceblue;
     text-decoration: none;

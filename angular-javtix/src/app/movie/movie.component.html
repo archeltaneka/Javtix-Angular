@@ -6,8 +6,8 @@
                     <img src="{{ mov[0].image_url }}"> 
                 </td> 
                 <td> 
-                    <!-- <iframe width="500" height="350" src="{{ mov[0].trailer_url }}"> 
-                    </iframe>  -->
+                    <iframe width="500" height="350" src="https://www.youtube.com/embed/KpFMVcZ4o7U"> 
+                    </iframe> 
                 </td> 
             </tr> 
         </table> 
@@ -46,26 +46,6 @@
                             {{info.time}} 
                         </td> 
                     </tr> 
-                    <!-- <tr> 
-                        <td style="text-align:center"> 
-                            13:00 - 15:30 
-                        </td> 
-                    </tr> 
-                    <tr> 
-                        <td style="text-align:center"> 
-                            16:00 - 18:30 
-                        </td> 
-                    </tr> 
-                    <tr> 
-                        <td style="text-align:center"> 
-                            19:00 - 21:30 
-                        </td> 
-                    </tr> 
-                    <tr> 
-                        <td style="text-align:center"> 
-                            22:00 - 00:30 
-                        </td> 
-                    </tr>  -->
                 </table> 
             </div> 
             <div class="col-sm-6"> 
@@ -103,42 +83,23 @@
                 </table> 
             </div> 
         </div> 
-        <!-- <div style="text-align:center"> 
+        <div style="text-align:center"> 
             <h3>Interested?</h3> 
             <form> 
                 <h5>Number of People</h5> 
-                <input type="number" value="" name="numberPeople" style="color:black" require> 
+                <input type="number" value="" name="numberPeople" style="color:white" require> 
                 <h4>Seats</h4> 
-                <table class="seats"> 
-                    <tr ng-repeat="x in seats"> 
-                        <td>Screen</td> 
-                        <td> 
-                            <input type="checkbox" name="chosen" value="chosen">{{ x.seatA }}</td> 
-                        <td> 
-                            <input type="checkbox" name="chosen" value="chosen">{{ x.seatB }}</td> 
-                        <td> 
-                            <input type="checkbox" name="chosen" value="chosen">{{ x.seatC }}</td> 
-                        <td> 
-                            <input type="checkbox" name="chosen" value="chosen">{{ x.seatD }}</td> 
-                        <td> 
-                            <input type="checkbox" name="chosen" value="chosen">{{ x.seatE }}</td> 
-                    </tr> 
-                </table> 
-                <h5>Cinema</h5> 
-                <select name="cinemaSelect" id="cinemaSelect" style="color:black" onChange="changetime(this.value);"> 
-                    <option value="" style="color:grey" disabled selected>Select</option> 
-                    <option value="xxi" style="color:black">XXI</option> 
-                    <option value="cgv" style="color:black">CGV</option> 
-                </select> 
+
                 <h5>Time</h5> 
-                <select name="time" id="time" style="color:black"> 
+                <select *ngFor="let info of movieInfo"  name="time" id="time" style="color:black"> 
                     <option value="" style="color:grey" disabled selected>Select</option> 
+                    <option>{{info.time}}</option>
                 </select> 
                 <br> 
                 <br> 
                 <input type="submit" value="Submit" name="Submit" style="color:black; width:7%; position:absolute; left:46.5%; background-color: grey; border: 2px solid black"> 
             </form> 
-        </div>  -->
+        </div> 
     </div> 
     <br> 
     <footer> 

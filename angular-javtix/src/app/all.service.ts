@@ -15,15 +15,15 @@ import 'rxjs/add/operator/map';
 @Injectable()
 export class AllService {
 
-  token: any = {};
-  data: any = {};
-  name: any = {};
-  email: any = {};
-  phoneNumber: any = {};
-  preferredCinema: any = {};
-  gender: any = {};
-  birthDate: any = {};
-  city: any = {};
+  token: any;
+  userId: any;
+  name: any;
+  email: any;
+  phoneNumber: any;
+  preferredCinema: any;
+  gender: any;
+  birthDate: any;
+  city: any;
 
   citiesResponse: any = {};
   schedulesResponse: any = {};
@@ -42,49 +42,42 @@ export class AllService {
   		res => console.log("Register success!"),
   		err => console.log(err.error)
   	);
-  	// return this.httpClient.post<any>(url, signup, this.header).map(res=>res);
   }
 
   signinService(signin: Signin) {
   	let response: any = {};
   	let url = 'http://localhost:8000/api/login';
 
-  	// return this.httpClient.post<any>(url, signin, this.header).subscribe(
-  	// 	res => {
-  	// 		console.log(res);
-  	// 		this.data = res;
-  	// 		this.name = JSON.parse(atob(this.data.access_token.split('.')[1])).name;
+  	return this.httpClient.post(url, signin, this.header).map(
+  		res=> {
+	  		response = res;
+	  		console.log(response);
 
-  	// 		localStorage.setItem('token', this.data.access_token);
-  	// 		localStorage.setItem('name', this.name);
+	  		localStorage.setItem('response', JSON.stringify(response));
+	  		this.name = response['data']['user']['name'];
+	  		this.userId = response['data']['user']['id'];
+	  		this.email = response['data']['user']['email'];
+	  		this.phoneNumber = response['data']['user']['phone_number'];
+	  		this.gender = response['data']['user']['gender'];
+	  		this.birthDate = response['data']['user']['birth_date'];
+	  		this.city = response['data']['user']['city'];
 
-  	// 		this.router.navigate(['/dashboard']);
-  	// 	},
-  	// 	err => {
-  	// 		let error = err.error;
-  	// 		console.log(error);
-  	// 	},
-  	// 	() => alert('Welcome back!')
-  	// 	);
+	  		localStorage.setItem('name', this.name);
+	  		localStorage.setItem('id', this.userId);
+	  		localStorage.setItem('email', this.email);
+	  		localStorage.setItem('phoneNumber', this.phoneNumber);
+	  		localStorage.setItem('gender', this.gender);
+	  		localStorage.setItem('birthDate', this.birthDate);
+	  		localStorage.setItem('city', this.city);
+  		},
+  		err=> {
+  			let error = err.error;
+  			console.log(error);
+  		});
+  }
 
-  	return this.http.post(url, signin).map(res=> {
-  		console.log(res);
-  		response = res;
-
-  		localStorage.setItem('response', JSON.stringify(response));
-  		this.token = JSON.parse(localStorage.getItem('response')).data.token;
-  		this.name = JSON.parse(localStorage.getItem('response')).data.user["0"].name;
-  		this.email = JSON.parse(localStorage.getItem('response')).data.user["0"].email;
-  		this.phoneNumber = JSON.parse(localStorage.getItem('response')).data.user["0"].phoneNumber;
-
-  		localStorage.setItem('preferredCinema', this.preferredCinema);
-  		localStorage.setItem('name', this.name);
-  		localStorage.setItem('email', this.email);
-  		localStorage.setItem('phoneNumber', this.phoneNumber);
-  		localStorage.setItem('gender', this.gender);
-  		localStorage.setItem('birthDate', this.birthDate);
-  		localStorage.setItem('city', this.city);
-  	})
+  updateProfile() {
+  	
   }
 
   getAllSchedules() {
@@ -105,6 +98,10 @@ export class AllService {
 
   getAllCities() {
   	return this.http.get('http://localhost:8000/api/cinema').map(res=>res.json());
+  }
+
+  transaction() {
+  	let url = 'http://localhost:8000/api/transaction';
   }
 
 }

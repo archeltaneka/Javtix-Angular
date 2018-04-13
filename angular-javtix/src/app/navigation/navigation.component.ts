@@ -16,7 +16,7 @@ export class NavigationComponent implements OnInit {
   }
 
   logout() {
-  	window.location.href="/home";
+  	window.location.href="/user";
   	localStorage.clear();
   }
 
