@@ -9,6 +9,8 @@ import { Signup } from './signup';
 import { Signin } from './signin';
 import { Cities } from './cities';
 import { Movies } from './movies';
+import { Profile } from './profile';
+import { creditCards } from './creditCards';
 
 import 'rxjs/add/operator/map';
 
@@ -56,19 +58,9 @@ export class AllService {
 	  		localStorage.setItem('response', JSON.stringify(response));
 	  		this.name = response['data']['user']['name'];
 	  		this.userId = response['data']['user']['id'];
-	  		this.email = response['data']['user']['email'];
-	  		this.phoneNumber = response['data']['user']['phone_number'];
-	  		this.gender = response['data']['user']['gender'];
-	  		this.birthDate = response['data']['user']['birth_date'];
-	  		this.city = response['data']['user']['city'];
 
 	  		localStorage.setItem('name', this.name);
 	  		localStorage.setItem('id', this.userId);
-	  		localStorage.setItem('email', this.email);
-	  		localStorage.setItem('phoneNumber', this.phoneNumber);
-	  		localStorage.setItem('gender', this.gender);
-	  		localStorage.setItem('birthDate', this.birthDate);
-	  		localStorage.setItem('city', this.city);
   		},
   		err=> {
   			let error = err.error;
@@ -76,8 +68,28 @@ export class AllService {
   		});
   }
 
-  updateProfile() {
-  	
+  getProfile(id:string) {
+    let url = 'http://localhost:8000/api/customer/'+id;
+
+    return this.httpClient.get(url, this.header);
+  }
+
+  updateProfile(profile: Profile) {
+  	let url = 'http://localhost:8000/api/customer';
+  	let response: any = {};
+  	return this.httpClient.put(url, profile, this.header);
+  }
+
+  addCreditCard(credit: creditCards) {
+    let response: any = {};
+    let url = 'http://localhost:8000/api/credit_card';
+    this.httpClient.post(url, credit, this.header).subscribe(
+      res => {
+        response = res;
+        console.log(response);
+      },
+      err => console.log(err.error)
+    );
   }
 
   getAllSchedules() {
@@ -88,8 +100,12 @@ export class AllService {
   	return this.http.get('http://localhost:8000/api/cinema').map(res=>res.json());
   }
 
-  getAllMovies() {
-  	return this.http.get('http://localhost:8000/api/movie').map(res=>res.json());
+  getAllNowPlayingMovies() {
+    return this.http.get('http://localhost:8000/api/movie/nowplaying').map(res=>res.json());
+  }
+
+  getAllComingSoonMovies() {
+  	return this.http.get('http://localhost:8000/api/movie/comingsoon').map(res=>res.json());
   }
 
   getMovieFromSearch(mov: any) {

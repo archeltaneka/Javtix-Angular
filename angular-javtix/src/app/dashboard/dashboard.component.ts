@@ -11,31 +11,33 @@ export class DashboardComponent implements OnInit {
 
   constructor(private service: AllService) { }
   
-  name: any;
-  userId: any;
-  email: any;
-  phoneNumber: any;
-  preferredCinema: any;
-  gender: any;
-  birthDate: any;
-  city: any;
+  model: any = {};
+  userData: any = {};
 
   ngOnInit() {
-  	this.name = localStorage.getItem('name');
-  	// console.log(this.name);
-  	this.userId = localStorage.getItem('id');
-  	// console.log(this.userId);
-  	this.email = localStorage.getItem('email');
-  	// console.log(this.email);
-  	this.phoneNumber = localStorage.getItem('phoneNumber');
-  	// console.log(this.phoneNumber);
-  	this.gender = localStorage.getItem('gender');
-  	// console.log(this.gender);
-  	this.birthDate = localStorage.getItem('birthDate');
-  	// console.log(this.birthDate);
-  	this.city = localStorage.getItem('city');
-  	// console.log(this.city);
+  	this.showProfile();
   }
 
+  showProfile() {
+    this.service.getProfile(localStorage.getItem('id')).subscribe(
+      res=>{
+        this.model.name = res[0]["name"];
+        this.model.email = res[0]["email"];
+        this.model.phoneNumber = res[0]["phone_number"];
+        this.model.gender = res[0]["gender"];
+        this.model.birthDate = res[0]["birth_date"];
+        this.model.city = res[0]["city"];
+        this.model.id = localStorage.getItem('id');
+        console.log(this.model);
+      },
+      err=>console.log(localStorage.getItem('id'))
+    );
+  }
+
+  save() {
+    console.log(this.model);  
+    this.service.updateProfile(this.model);
+    alert('Profile successfully saved!');
+  }
 
 }

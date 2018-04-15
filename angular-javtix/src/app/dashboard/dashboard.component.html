@@ -5,70 +5,60 @@
         <br> 
         <h3 style="text-align:center;">Dashboard</h3> 
         <hr style="height:5px;width:95%;border:none;color:#2A363B;background-color:#2A363B;border-color:#2A363B"> 
-        <h5><b>--Name--</b></h5> 
-        <input type="text" id="profile" name="name" value="{{name}}" disabled><button onclick="edit()"><span class="glyphicon glyphicon-pencil"></span></button>
-        <br><br>
-        <h5><b>--Birthday--</b></h5> 
-        <input type="text" id="profile" name="name" value="{{birthDate}}" disabled><button onclick="edit()"><span class="glyphicon glyphicon-pencil"></span></button>
-        <br><br>
-         <h5><b>--City--</b></h5> 
-        <input type="text" id="profile" name="name" value="{{city}}" disabled><button onclick="edit()"><span class="glyphicon glyphicon-pencil"></span></button>
-        <br><br>
-        <h5><b>--Phone Number--</b></h5> 
-        <input type="text" id="profile" name="name" value="{{phoneNumber}}" disabled><button onclick="edit()"><span class="glyphicon glyphicon-pencil"></span></button>
-        <br><br>
-        <h5><b>--Email--</b></h5> 
-        <input type="text" id="profile" name="name" value="{{email}}" disabled><button onclick="edit()"><span class="glyphicon glyphicon-pencil"></span></button>
-        <br> 
-        <br> 
-        <div class="text-center"> 
-            <a class="btn btn-primary" role="button" data-toggle="collapse" href="#update"> 
-                Save 
-            </a> 
-        </div> 
-        <br> 
-        <div class="collapse" id="update"> 
-            <form action="" method="post"> 
-                <h5>Preferred Cinema</h5> 
-                <select *ngFor="let cinema of cinemaData" name="preferredCinema" id="select"> 
-                    <option value="" selected disabled>Select</option> 
-                    <option>{{cinema.cinema_name}}</option> 
-                </select> 
-                <h5>Name</h5> 
-                <input type="text" require> 
-                <h5>Email</h5> 
-                <input type="email" require> 
-                <h5>Password</h5> 
-                <input type="password" require> 
-                <h5>Phone Number</h5> 
-                <input type="text" require> 
-                <h5>Gender</h5> 
-                <select name="gender" id="select"> 
-                    <option value="" selected disabled>Select</option> 
-                    <option value="male">Male</option> 
-                    <option value="female">Female</option> 
-                </select> 
-                <h5>Birthdate</h5> 
-                <div class="container" id="select" style="margin:0 auto;"> 
-                    <div class="row"> 
-                        <div class='col-sm-6'> 
-                            <div class="form-group"> 
-                                <div class='input-group date' id='datetimepicker1'> 
-                                    <input type='text' class="form-control" /> 
-                                    <span class="input-group-addon"> 
-                                        <span class="glyphicon glyphicon-calendar"></span> 
-                                    </span> 
-                                </div> 
-                            </div> 
-                        </div> 
-                    </div> 
-                </div> 
-                <h5>City</h5> 
-                <input type="text" require>  
-                <br> 
-                <br> 
-                <input type="submit" value="Submit" name="Submit" style="color:black;  background-color: grey; border: 2px solid black"> 
-            </form> 
-        </div> 
+        <form>
+            <h5><b>--Name--</b></h5>
+            <input type="text" id="profile" name="name" [(ngModel)]="model.name" disabled>
+            <button onclick="edit()"><span class="glyphicon glyphicon-pencil"></span></button>
+            <br><br>
+            <h5><b>--Birthday--</b></h5> 
+            <input type="text" id="profile" name="birthDate" [(ngModel)]="model.birthDate"  disabled>
+            <button onclick="edit()"><span class="glyphicon glyphicon-pencil"></span></button>
+            <br><br>
+            <h5><b>--City--</b></h5> 
+            <input type="text" id="profile" name="city" [(ngModel)]="model.city"  disabled>
+            <button onclick="edit()"><span class="glyphicon glyphicon-pencil"></span></button>
+            <br><br>
+            <h5><b>--Phone Number--</b></h5>
+            <input type="text" id="profile" name="phoneNumber" [(ngModel)]="model.phoneNumber"  disabled>
+            <button onclick="edit()"><span class="glyphicon glyphicon-pencil"></span></button>
+            <br><br>
+            <h5><b>--Email--</b></h5> 
+            <input type="text" id="profile" name="email" [(ngModel)]="model.email"  disabled>
+            <button onclick="edit()"><span class="glyphicon glyphicon-pencil"></span></button>
+            <br> 
+            <br> 
+            <div class="text-center"> 
+                <a class="btn btn-primary" role="button" (click)="save()"> 
+                    Save 
+                </a>
+            </div>
+            <hr style="border-color: black;">
+            <br>
+            <a class="btn btn-primary" role="button" data-toggle="collapse" href="#addCreditCard"> 
+                    Add Credit Card 
+            </a>
+            <div class="collapse" id="addCreditCard">
+                <div class="card card-body">
+                   <form>
+                        <h5>First Name</h5>
+                        <input type="text" require>
+                        <h5>Last Name</h5>
+                        <input type="text" require>
+                        <h5>Address</h5>
+                        <textarea rows="10" cols="30"></textarea>
+                        <h5>ZIP</h5>
+                        <input type="text" require>
+                        <h5>City</h5>
+                        <input type="text" require>
+                        <br>
+                        <div class="text-center"> 
+                            <a class="btn btn-primary" role="button"> 
+                                Add
+                            </a>
+                        </div>
+                   </form>
+                </div>
+            </div>
+        </form>
     </div>
 </body> 

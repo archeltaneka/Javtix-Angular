@@ -14,22 +14,27 @@ export class HomeComponent implements OnInit {
 
   constructor(private http: HttpClient, private service: AllService, private router: Router) { }
 
-  movies: Array<any>;
+  nowPlayingMovies: Array<any>;
+  comingSoonMovies: Array<any>;
   error: string;
 
   movieSearchData: any = {};
   movieSearchError: string;
 
   ngOnInit() {
-  	this.service.getAllMovies().subscribe(
+  	this.service.getAllNowPlayingMovies().subscribe(
   		datas => {
-  			this.movies = datas;
+  			this.nowPlayingMovies = datas;
   			console.log(datas);
   		},
   		error => {
   			this.error = error.statusText
 		}
   	);
+    this.service.getAllComingSoonMovies().subscribe(
+      datas => this.comingSoonMovies = datas,
+      error => console.log(error)
+    );
   }
 
   viewMovieInfo(mid: any) {

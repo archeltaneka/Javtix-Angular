@@ -43,7 +43,7 @@ export class UserComponent implements OnInit {
   			this.signInFlag = true;
   			setTimeout(() => window.location.href="/dashboard", 2000);
   		},
-  		err => alert(err.Error)
+  		err => console.log(err.Error)
   	);
   }
 

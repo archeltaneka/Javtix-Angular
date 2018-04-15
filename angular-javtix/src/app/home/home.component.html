@@ -60,7 +60,7 @@
             <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Select City...
             <span class="caret"></span></button>
             <ul class="dropdown-menu">
-                <li *ngFor="let movie of movies"><a href="#">{{movie.movie_name}}</a></li>
+                <li *ngFor="let movie of nowPlayingMovies"><a href="#">{{movie.movie_name}}</a></li>
             </ul>
         </div>
         <div class="col-sm-1">
@@ -72,7 +72,7 @@
 	    <h2 id="mov" class="movieHeader" style="text-align:center">Now Playing</h2>
 	    <hr>
 	    <div class="row" style="width:100%" align="center">
-	        <div *ngFor="let movie of movies" class="col-sm-3">
+	        <div *ngFor="let movie of nowPlayingMovies" class="col-sm-3">
 	            <button (click)="viewMovieInfo(movie.id)"><img src="{{movie.image_url}}" class="view"></button>
 	        </div>
 	    <br>
@@ -81,19 +81,9 @@
     <h2 id="mov" class="movieHeader" style="text-align:center">Coming Soon</h2>
     <hr>
     <div class="row" style="width:100%" align="center">
-        <div class="col-sm-3">
-            <img src="../assets/images/Mov5.jpg" class="view">
+        <div *ngFor="let movie of comingSoonMovies" class="col-sm-3">
+            <img src="{{movie.image_url}}" class="view comingSoon">
         </div>
-        <div class="col-sm-3">
-            <img src="../assets/images/Mov6.jpg" class="view">
-        </div>
-        <div class="col-sm-3">
-            <img src="../assets/images/Mov7.jpg" class="view">
-        </div>
-        <div class="col-sm-3">
-            <img src="../assets/images/Mov8.jpg" class="view">
-        </div>
-        <br>
     <br>
     </div>
     <div class="collapse" id="more2" style="padding:10pt 0pt 0pt 0pt">
