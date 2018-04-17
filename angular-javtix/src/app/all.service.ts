@@ -10,6 +10,7 @@ import { Signin } from './signin';
 import { Cities } from './cities';
 import { Movies } from './movies';
 import { Profile } from './profile';
+import { Transactions } from './transactions';
 import { creditCards } from './creditCards';
 
 import 'rxjs/add/operator/map';
@@ -68,6 +69,19 @@ export class AllService {
   		});
   }
 
+  buyTicket(transaction: Transactions) {
+    let response: any = {};
+    let url = 'http://localhost:8000/api/purchases';
+
+    return this.httpClient.post(url, transaction, this.header).map(
+      res => {
+        response = res;
+        console.log(response);
+      },
+      err => console.log(err.error)
+    );
+  }
+
   getProfile(id:string) {
     let url = 'http://localhost:8000/api/customer/'+id;
 
@@ -75,21 +89,9 @@ export class AllService {
   }
 
   updateProfile(profile: Profile) {
-  	let url = 'http://localhost:8000/api/customer';
-  	let response: any = {};
+  	let url = 'http://localhost:8000/api/customer/' + profile.id;
+    console.log(profile);
   	return this.httpClient.put(url, profile, this.header);
-  }
-
-  addCreditCard(credit: creditCards) {
-    let response: any = {};
-    let url = 'http://localhost:8000/api/credit_card';
-    this.httpClient.post(url, credit, this.header).subscribe(
-      res => {
-        response = res;
-        console.log(response);
-      },
-      err => console.log(err.error)
-    );
   }
 
   getAllSchedules() {
@@ -113,11 +115,15 @@ export class AllService {
   }
 
   getAllCities() {
-  	return this.http.get('http://localhost:8000/api/cinema').map(res=>res.json());
+  	return this.http.get('http://localhost:8000/api/city').map(res=>res.json());
   }
 
-  transaction() {
-  	let url = 'http://localhost:8000/api/transaction';
+  getAllSeats(tid: any) {
+    return this.http.get('http://lcoalhost:8000/api/all_seats/' + tid.id).map(res=>res.json());
+  }
+
+  getAllPromos() {
+    return this.http.get('http://localhost:8000/api/promo').map(res=>res.json());
   }
 
 }

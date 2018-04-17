@@ -16,10 +16,14 @@ export class HomeComponent implements OnInit {
 
   nowPlayingMovies: Array<any>;
   comingSoonMovies: Array<any>;
+  allCities: Array<any>;
   error: string;
 
   movieSearchData: any = {};
   movieSearchError: string;
+
+  selectedMovie = "6fb7fdba-5c31-4b5a-a06f-1cc3773b13c4";
+  selectedCity = "Jakarta";
 
   ngOnInit() {
   	this.service.getAllNowPlayingMovies().subscribe(
@@ -35,6 +39,10 @@ export class HomeComponent implements OnInit {
       datas => this.comingSoonMovies = datas,
       error => console.log(error)
     );
+    this.service.getAllCities().subscribe(
+      datas => this.allCities = datas,
+      error => console.log(error)
+     );
   }
 
   viewMovieInfo(mid: any) {
@@ -42,18 +50,23 @@ export class HomeComponent implements OnInit {
   	this.router.navigate([`/movie/${mid}`]);
   }
 
-  getMovieClick(mid: any) {
-  	console.log(mid);
-  	this.service.getMovieFromSearch(mid).subscribe(
-  		data => {
-  			this.movieSearchData = data;
-  			console.log(data);
-  		},
-  		error => {
-  			console.log(error.statusText);
-  			this.movieSearchError = error.statusText
-  		}
-  	);
+  changeMovie(e) {
+    this.selectedMovie = e.target.value;
+  }
+
+  changeCity(e) {
+    this.selectedCity = e.target.value;
+  }
+
+  search() {
+    console.log(this.selectedMovie);
+    console.log(this.selectedCity);
+    this.router.navigate([`/movie/${this.selectedMovie}/${this.selectedCity}`]);
+  }
+
+  movieClick(mid: any) {
+    console.log(mid);
+    this.router.navigate([`/movie/${mid}/Jakarta`]);
   }
 
 }

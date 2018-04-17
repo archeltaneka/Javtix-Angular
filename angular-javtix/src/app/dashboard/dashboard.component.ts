@@ -11,7 +11,7 @@ export class DashboardComponent implements OnInit {
 
   constructor(private service: AllService) { }
   
-  model: any = {};
+  model: any = [];
   userData: any = {};
 
   ngOnInit() {
@@ -28,16 +28,20 @@ export class DashboardComponent implements OnInit {
         this.model.birthDate = res[0]["birth_date"];
         this.model.city = res[0]["city"];
         this.model.id = localStorage.getItem('id');
-        console.log(this.model);
       },
       err=>console.log(localStorage.getItem('id'))
     );
   }
 
   save() {
-    console.log(this.model);  
-    this.service.updateProfile(this.model);
-    alert('Profile successfully saved!');
+    console.log(this.model);
+    this.service.updateProfile(this.model).subscribe(
+      res=>{
+        alert('Profile successfully saved!');
+        // this.showProfile();
+      },
+      err=>console.log(err.error)
+    );
   }
 
 }
