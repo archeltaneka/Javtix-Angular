@@ -1,15 +1,9 @@
 <!doctype html>
 <html lang="en">
 <head>
-<<<<<<< refs/remotes/origin/master
   <meta charset="utf-8">
   <title>JAVTix - Cinema Beyond Evolution</title>
   <base href="/">
-=======
-    <meta charset="utf-8">
-    <title>AngularJavtix</title>
-    <base href="/">
->>>>>>> Payment page commit
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="icon" type="image/x-icon" href="favicon.ico">
@@ -51,7 +45,6 @@
     window.onload = function() {
         tabbed(event, 'LogIn');
     };
-<<<<<<< refs/remotes/origin/master
   </script>
   <script>
     function edit() {
@@ -66,37 +59,4 @@
     });
   </script>
 </body>
-=======
-    </script>
-    <script>
-    function tabbedProfile(evt, tab) {
-            var i, tabcontent, tablinks;
-
-            tabcontent = document.getElementsByClassName("tabcontent");
-            for (i = 0; i < tabcontent.length; i++) {
-                tabcontent[i].style.display = "none";
-            }
-
-            tablinks = document.getElementsByClassName("tablinks");
-            for (i = 0; i < tablinks.length; i++) {
-                tablinks[i].className = tablinks[i].className.replace("active", "");
-            }
-
-            document.getElementById(tab).style.display = "block";
-            evt.currentTarget.className += " active";
-        }
-
-    window.onload = function() {
-        tabbed(event, 'Profile');
-    };
-    </script>
-    <script>
-        $(function() {
-        $('#datetimepicker1').datetimepicker({
-            format: 'DD/MM/YYYY'
-            });
-        });
-    </script>
-    </body>
->>>>>>> Payment page commit
 </html>
