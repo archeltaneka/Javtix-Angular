@@ -38,66 +38,61 @@
                 <table style="color:aliceblue"> 
                     <tr> 
                         <th style="text-align:center"> 
-                            <h3>CGV</h3> 
+                            <h3>Time</h3> 
                         </th> 
                     </tr> 
                     <tr> 
-                        <td *ngFor="let info of movieInfo" style="text-align:center"> 
-                            {{info.time}} 
+                        <td style="text-align:center">
+                            <ul>
+                                <li *ngFor="let info of movieInfo">{{info.time}}</li>
+                            </ul>
                         </td> 
                     </tr> 
                 </table> 
-            </div> 
+            </div>
             <div class="col-sm-6"> 
                 <table style="color:aliceblue"> 
                     <tr> 
                         <th style="text-align:center"> 
-                            <h3>XXI</h3> 
+                            <h3>Place</h3> 
                         </th> 
                     </tr> 
                     <tr> 
                         <td style="text-align:center"> 
-                            10:10 - 12:40 
-                        </td> 
-                    </tr> 
-                    <tr> 
-                        <td style="text-align:center"> 
-                            13:10 - 15:40 
-                        </td> 
-                    </tr> 
-                    <tr> 
-                        <td style="text-align:center"> 
-                            16:10 - 18:40 
-                        </td> 
-                    </tr> 
-                    <tr> 
-                        <td style="text-align:center"> 
-                            19:10 - 21:40 
-                        </td> 
-                    </tr> 
-                    <tr> 
-                        <td style="text-align:center"> 
-                            22:10 - 00:40 
+                            <ul>
+                                <li *ngFor="let info of movieInfo">{{info.cinemas}}</li>
+                            </ul>
                         </td> 
                     </tr> 
                 </table> 
-            </div> 
+            </div>
         </div> 
         <div style="text-align:center"> 
-            <h3>Interested?</h3> 
-            <form> 
-                <h5>Number of People</h5> 
-                <input type="number" value="" name="numberPeople" style="color:white" require> 
-                <h4>Seats</h4> 
-
-                <h5>Time</h5> 
-                <select *ngFor="let info of movieInfo"  name="time" id="time" style="color:black"> 
-                    <option value="" style="color:grey" disabled selected>Select</option> 
-                    <option>{{info.time}}</option>
+            <h3>Interested?</h3>
+            <form method="post">
+                <h5>Select Theatre</h5> 
+                <select style="color:black" (change)="selectTheatre($event)"> 
+                    <option style="color:grey" disabled selected>Select</option> 
+                    <option *ngFor="let info of lstOfTheatre">{{info}}</option>
                 </select> 
-                <br> 
-                <br> 
-                <input type="submit" value="Submit" name="Submit" style="color:black; width:7%; position:absolute; left:46.5%; background-color: grey; border: 2px solid black"> 
+                <h5>Select Time</h5> 
+                <select style="color:black" (change)="selectTime($event)"> 
+                    <option style="color:grey" disabled selected>Select</option> 
+                    <option *ngFor="let info of lstOfTime" [value]="">{{info}}</option>
+                </select>
+                <h4>Seats</h4> 
+                <select style="color:black" (change)="selectSeat($event)">
+                    <option style="color:grey" disabled selected>Select</option>
+                    <option *ngFor="let info of selectedSeat" [value]="id1">{{info['seat_number']}}</option>
+                </select>
+                <br>
+                <h4>Promo Available</h4> 
+                <select style="color:black" (change)="selectPromo($event)">
+                    <option style="color:grey" disabled selected>Select</option>
+                    <option *ngFor="let info of lstOfPromos" [value]="info.id">{{info.name}}</option>
+                </select>
+                <br><br>
+                <input type="submit" value="Submit" name="Submit" (click)="purchase()" style="color:black; width:7%; position:absolute; left:46.5%; background-color: grey; border: 2px solid black">
             </form> 
         </div> 
     </div> 

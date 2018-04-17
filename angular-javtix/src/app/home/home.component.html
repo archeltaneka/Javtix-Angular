@@ -49,23 +49,15 @@
 	</div>
 
 	<nav class="navbar navbar-inverse">
-	   <div class="col-sm-1 dropdown">
-            <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Select Movie...
-            <span class="caret"></span></button>
-            <ul class="dropdown-menu">
-                <li *ngFor="let movie of movies" (click)="getMovieClick(movie.id)"><a href="#">{{movie.movie_name}}</a></li>
-            </ul>
-        </div>
-        <div class="col-sm-1 dropdown">
-            <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Select City...
-            <span class="caret"></span></button>
-            <ul class="dropdown-menu">
-                <li *ngFor="let movie of nowPlayingMovies"><a href="#">{{movie.movie_name}}</a></li>
-            </ul>
-        </div>
-        <div class="col-sm-1">
-            <button><span class="glyphicon glyphicon-search"></span>Search</button>
-        </div>
+        <select (change)="changeMovie($event)">
+            <option selected disabled>Select Movie...</option>
+            <option *ngFor="let movie of nowPlayingMovies" [value]="movie.id">{{movie.movie_name}}</option>
+        </select>
+        <select (change)="changeCity($event)">
+            <option selected disabled>Select City...</option>
+            <option *ngFor="let city of allCities" [value]="city.city">{{city.city}}</option>
+        </select>
+        <button (click)="search()"><span class="glyphicon glyphicon-search"></span>Search</button>
 	</nav>
 
 	<div style="color:aliceblue">
@@ -73,7 +65,7 @@
 	    <hr>
 	    <div class="row" style="width:100%" align="center">
 	        <div *ngFor="let movie of nowPlayingMovies" class="col-sm-3">
-	            <button (click)="viewMovieInfo(movie.id)"><img src="{{movie.image_url}}" class="view"></button>
+	            <button (click)="movieClick(movie.id)"><img src="{{movie.image_url}}" class="view"></button>
 	        </div>
 	    <br>
         </div>
@@ -86,28 +78,7 @@
         </div>
     <br>
     </div>
-    <div class="collapse" id="more2" style="padding:10pt 0pt 0pt 0pt">
-        <div class="row" style="width:100%" align="center">
-            <div class="col-sm-3">
-                <img src="../assets/images/Mov9.jpg" class="view">
-            </div>
-            <div class="col-sm-3">
-                <img src="../assets/images/Mov10.jpg" class="view">
-            </div>
-            <div class="col-sm-3">
-                <img src="../assets/images/Mov11.jpg" class="view">
-            </div>
-            <div class="col-sm-3">
-                <img src="../assets/images/Mov12.jpg" class="view">
-            </div>
-        </div>
-    </div>
     <br>
-    <div class="text-center">
-      <a class="btn btn-primary" role="button" data-toggle="collapse" href="#more2">
-        See more
-      </a>
-    </div>
     <h2 class="header" style="text-align:center">Cinemas</h2>
     <hr>
     <div class="row" style="width:100%" align="center">

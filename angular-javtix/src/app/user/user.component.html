@@ -11,9 +11,9 @@
             <hr>
             <form method="post" (submit)="register()">
                 <h5>Preferred Cinema</h5>
-                <select *ngFor="let cinema of cinemaData" [(ngModel)]="signup.preferred_cinema_id" name="preferredCinema" id="select">
+                <select [(ngModel)]="signup.preferred_cinema_id" name="preferredCinema" id="select">
                     <option selected disabled>Select</option>
-                    <option [value]="cinema.id">{{ cinema.cinema_name }}</option> 
+                    <option *ngFor="let cinema of cinemaData" [value]="cinema[0].id">{{cinema[0].cinema_name}}</option> 
                 </select>
                 <h5>Name</h5>
                 <input type="text" [(ngModel)]="signup.name" [ngModelOptions]="{standalone: true}" require>

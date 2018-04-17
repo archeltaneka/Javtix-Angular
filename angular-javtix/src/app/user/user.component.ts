@@ -52,11 +52,14 @@ export class UserComponent implements OnInit {
   	this.model = new Signin();
 
   	this.allService.getAllCinemas().subscribe(
-  		datas => this.cinemaData = datas,
+  		datas => {
+        this.cinemaData = datas
+        console.log(this.cinemaData);
+      },
   		error => this.error = error.statusText
   	);
 
-  	this.allService.getAllCinemas().subscribe(
+  	this.allService.getAllCities().subscribe(
   		cities => this.cityData = cities,
   		error => this.cityError = error.statusText
   	);
