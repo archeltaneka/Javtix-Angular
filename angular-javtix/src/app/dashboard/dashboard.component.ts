@@ -38,7 +38,7 @@ export class DashboardComponent implements OnInit {
     this.service.updateProfile(this.model).subscribe(
       res=>{
         alert('Profile successfully saved!');
-        // this.showProfile();
+        this.showProfile();
       },
       err=>console.log(err.error)
     );

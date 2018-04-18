@@ -64,19 +64,23 @@ export class MovieComponent implements OnInit {
   }
 
   purchase() {
-    let paymentInfo = {};
+    let paymentInfo: any = {};
     var handler = (<any>window).StripeCheckout.configure({
       key: 'pk_test_18fkuvplx0UaWxpA8IOObWP2',
       locale: 'auto',
       token: function (token: any) {
-        paymentInfo['tokenId'] = token.id;
-        paymentInfo['email'] = token.email;
-        paymentInfo['userId'] = localStorage.getItem('id');
+        paymentInfo.tokenId = token.id;
+        paymentInfo.email = token.email;
+        paymentInfo.userId = localStorage.getItem('id');
         // paymentInfo['scheduleId'] = this.id1;
         // paymentInfo['seatId'] = this.selectedSeat;
-        paymentInfo['qty'] = 1;
+        paymentInfo.qty = 1;
         // paymentInfo['promoId'] = this.selectedPromo;
         console.log(paymentInfo);
+        this.service.buyTicket(paymentInfo).subscribe(
+          res => console.log(res),
+          err => console.log(err.error)
+        );
       }
     });
     handler.open({
@@ -85,13 +89,14 @@ export class MovieComponent implements OnInit {
       amount: 2000
     });
 
-    paymentInfo['scheduleId'] = this.id1;
-    paymentInfo['seatId'] = this.selectedSeat;
-    paymentInfo['promoId'] = this.selectedPromo;
+    paymentInfo.scheduleId = this.id1;
+    paymentInfo.seatId = this.selectedSeat;
+    paymentInfo.totalPrice = 10000;
+    paymentInfo.promoId = this.selectedPromo;
 
     // console.log(paymentInfo);
 
-    // this.service.buyTicket(this.paymentInfo).subscribe(
+    // this.service.buyTicket(paymentInfo).subscribe(
     //   res => console.log(res),
     //   err => console.log(err.error)
     // );
