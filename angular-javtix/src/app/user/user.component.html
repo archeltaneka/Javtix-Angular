@@ -1,6 +1,4 @@
 <body style="background-color: #2A363B" onload="tabbed(event, 'LogIn');">
-    <br>
-    <br>
     <div style="color:aliceblue; width:80%; position:relative; margin:auto">
         <div class="tab" style="text-align:center">
             <button class="tablinks" onclick="tabbed(event, 'SignUp')" style="color: black">Sign Up</button>
@@ -13,7 +11,7 @@
                 <h5>Preferred Cinema</h5>
                 <select [(ngModel)]="signup.preferred_cinema_id" name="preferredCinema" id="select">
                     <option selected disabled>Select</option>
-                    <option *ngFor="let cinema of cinemaData" [value]="cinema[0].id">{{cinema[0].cinema_name}}</option> 
+                    <option *ngFor="let cinema of cinemaData" [value]="cinema.id">{{cinema.cinema_name}}</option> 
                 </select>
                 <h5>Name</h5>
                 <input type="text" [(ngModel)]="signup.name" [ngModelOptions]="{standalone: true}" require>
@@ -34,7 +32,7 @@
                 <h5>City</h5>
                   <select [(ngModel)]="signup.city" name="city" id="select">
                     <option value="" selected disabled>Select</option>
-                    <option *ngFor="let city of cityData" [value]="city.city">{{city.city}}</option>
+                    <option *ngFor="let city of cinemaData" [value]="city.city">{{city.city}}</option>
                   </select>
                 <br><br>
                 <input type="submit" value="Submit" name="Submit" style="color:black; width:7%; position:relative; left:47%; background-color: grey; border: 2px solid black">

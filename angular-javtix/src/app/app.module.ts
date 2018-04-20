@@ -15,7 +15,6 @@ import { TeamComponent } from './team/team.component';
 import { SignupComponent } from './signup/signup.component';
 import { MovieComponent } from './movie/movie.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
-import { PaymentComponent } from './payment/payment.component';
 
 
 @NgModule({
@@ -28,7 +27,6 @@ import { PaymentComponent } from './payment/payment.component';
     SignupComponent,
     MovieComponent,
     DashboardComponent,
-    PaymentComponent,
   ],
   imports: [
     BrowserModule,

@@ -22,6 +22,9 @@ export class MovieComponent implements OnInit {
   movieInfo: any = {};
   error: string;
 
+  pricingInfo: any = {};
+  paymentInfo: any = {'stripeToken':'iyt' };
+
   lstOfTheatre: any = [];
   lstOfTime: any = [];
   lstOfSeats: any = [];
@@ -63,43 +66,45 @@ export class MovieComponent implements OnInit {
     );
   }
 
+  faker(tokens : any) {
+      this.paymentInfo['stripeToken'] = tokens.id;
+      this.paymentInfo.stripeEmail = tokens.email;
+      this.paymentInfo.user_id = localStorage.getItem('id');
+      this.paymentInfo.stripeTokenType = 'card';
+
+      this.service.buyTicket(this.paymentInfo).subscribe(
+        res=>{
+          console.log(res);
+
+        },
+        err=>console.log(err.error)
+      );
+    }
+
   purchase() {
-    let paymentInfo: any = {};
+    var flag: boolean;
     var handler = (<any>window).StripeCheckout.configure({
       key: 'pk_test_18fkuvplx0UaWxpA8IOObWP2',
       locale: 'auto',
-      token: function (token: any) {
-        paymentInfo.tokenId = token.id;
-        paymentInfo.email = token.email;
-        paymentInfo.userId = localStorage.getItem('id');
-        // paymentInfo['scheduleId'] = this.id1;
-        // paymentInfo['seatId'] = this.selectedSeat;
-        paymentInfo.qty = 1;
-        // paymentInfo['promoId'] = this.selectedPromo;
-        console.log(paymentInfo);
-        this.service.buyTicket(paymentInfo).subscribe(
-          res => console.log(res),
-          err => console.log(err.error)
-        );
-      }
+      token: this.faker.bind(this)
     });
     handler.open({
       name: 'Javtix',
       description: 'Payment',
-      amount: 2000
+      amount: this.pricingInfo[0].weekday_price
+    });
+    window.addEventListener("popstate", function() {
+      handler.close();
+      window.location.href='/home';
     });
 
-    paymentInfo.scheduleId = this.id1;
-    paymentInfo.seatId = this.selectedSeat;
-    paymentInfo.totalPrice = 10000;
-    paymentInfo.promoId = this.selectedPromo;
+    this.paymentInfo.schedule_id = this.id1;
+    this.paymentInfo.seat_id = this.selectedSeat;
+    this.paymentInfo.quantity = 1;
+    this.paymentInfo.total_price = this.pricingInfo[0].weekday_price;
+    this.paymentInfo.promo_id = this.selectedPromo;
 
     // console.log(paymentInfo);
-
-    // this.service.buyTicket(paymentInfo).subscribe(
-    //   res => console.log(res),
-    //   err => console.log(err.error)
-    // );
   }
 
   selectTheatre(e){
@@ -113,7 +118,6 @@ export class MovieComponent implements OnInit {
 
   selectTime(e){
     this.selectedTime = e.target.value;
-    // let id1,id2;
     for(let t of this.movieInfo){
        if(t['time']==this.selectedTime && t['cinemas']==this.selectedTheatre){
          this.id2 = t['theatre_id'];
@@ -124,7 +128,7 @@ export class MovieComponent implements OnInit {
     this.http.get(`http://localhost:8000/api/availableSeat?schedule_id=${this.id1}&theatre_id=${this.id2}`).subscribe(
       res=>{
         this.selectedSeat = res;
-        console.log(res);
+        console.log(this.selectedSeat);
       }
     );
   }
@@ -132,6 +136,13 @@ export class MovieComponent implements OnInit {
   selectSeat(e) {
     this.selectedSeat = e.target.value;
     console.log(this.selectedSeat);
+    this.http.get(`http://localhost:8000/api/pricing?id=${this.selectedSeat}`).subscribe(
+      res=>{
+        this.pricingInfo = res;
+        console.log(this.pricingInfo[0].weekday_price);
+      },
+      err=>console.log(err.error)
+    );
   }
 
   selectPromo(e) {

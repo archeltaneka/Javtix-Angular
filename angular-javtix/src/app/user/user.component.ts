@@ -60,7 +60,10 @@ export class UserComponent implements OnInit {
   	);
 
   	this.allService.getAllCities().subscribe(
-  		cities => this.cityData = cities,
+  		cities => {
+        this.cityData = cities,
+        console.log(this.cityData)
+      },
   		error => this.cityError = error.statusText
   	);
   }

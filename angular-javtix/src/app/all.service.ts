@@ -69,7 +69,7 @@ export class AllService {
   		});
   }
 
-  buyTicket(transaction: Transactions) {
+  buyTicket(transaction: any) {
     let response: any = {};
     let url = 'http://localhost:8000/api/purchases';
 
@@ -124,6 +124,10 @@ export class AllService {
 
   getAllPromos() {
     return this.http.get('http://localhost:8000/api/promo').map(res=>res.json());
+  }
+
+  getPrice() {
+    return this.http.get('http://localhost:8000/api/pricing').map(res=>res.json());
   }
 
 }
