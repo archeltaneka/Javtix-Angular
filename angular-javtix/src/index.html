@@ -26,29 +26,62 @@
     </script>
     <script>
     function tabbed(evt, tab) {
-            var i, tabcontent, tablinks;
+      var i, tabcontent, tablinks;
 
-            tabcontent = document.getElementsByClassName("tabcontent");
-            for (i = 0; i < tabcontent.length; i++) {
-                tabcontent[i].style.display = "none";
-            }
+      tabcontent = document.getElementsByClassName("tabcontent");
+      for (i = 0; i < tabcontent.length; i++) {
+          tabcontent[i].style.display = "none";
+      }
 
-            tablinks = document.getElementsByClassName("tablinks");
-            for (i = 0; i < tablinks.length; i++) {
-                tablinks[i].className = tablinks[i].className.replace("active", "");
-            }
+      tablinks = document.getElementsByClassName("tablinks");
+      for (i = 0; i < tablinks.length; i++) {
+          tablinks[i].className = tablinks[i].className.replace("active", "");
+      }
 
-            document.getElementById(tab).style.display = "block";
-            evt.currentTarget.className += " active";
-        }
-
-    window.onload = function() {
-        tabbed(event, 'LogIn');
-    };
+      document.getElementById(tab).style.display = "block";
+      evt.currentTarget.className += " active";
+  }
   </script>
   <script>
-    function edit() {
-      document.getElementById('profile').disabled = false;
+    function edit(nameType) {
+      document.getElementById("profile").disabled = false;
+      if (nameType == 'name') {
+        if (!nameType.value.match(/^[0-9a-z]+$/)) {
+          alert("Please input alphanumeric only.");
+          return false;
+        }
+      }
+      else if (nameType == 'birthDate'){
+        var dateString = document.getElementsByName('birthDate').value;
+        var myDate = new Date(dateString);
+        var today = new Date();
+        if (myDate > today) {
+          alert('You cannot enter a date in the future!');
+          return false;
+        }
+      }
+      else if (nameType == 'city'){
+        if (!nameType.value.match(/^[0-9a-z]+$/)) {
+          alert("Please input alphanumeric only.");
+          return false;
+        }
+      }
+      else if (nameType == 'phoneNumber') {
+        if (isNaN(nameType.value)) {
+          alert("Please input number only.");
+          return false;
+        }        
+      }  
+      else {
+
+      }
+      return true;
+    }
+  </script>
+  <script>
+    function save()
+    {
+      document.getElementById("profile").disabled = true;
     }
   </script>
   <script>
