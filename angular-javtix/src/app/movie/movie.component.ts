@@ -23,7 +23,7 @@ export class MovieComponent implements OnInit {
   error: string;
 
   pricingInfo: any = {};
-  paymentInfo: any = {'stripeToken':'iyt' };
+  paymentInfo: any = {};
 
   lstOfTheatre: any = [];
   lstOfTime: any = [];
@@ -71,11 +71,10 @@ export class MovieComponent implements OnInit {
       this.paymentInfo.stripeEmail = tokens.email;
       this.paymentInfo.user_id = localStorage.getItem('id');
       this.paymentInfo.stripeTokenType = 'card';
-
+      console.log(this.paymentInfo);
       this.service.buyTicket(this.paymentInfo).subscribe(
         res=>{
           console.log(res);
-
         },
         err=>console.log(err.error)
       );
@@ -91,17 +90,16 @@ export class MovieComponent implements OnInit {
     handler.open({
       name: 'Javtix',
       description: 'Payment',
-      amount: this.pricingInfo[0].weekday_price
+      amount: this.pricingInfo[0].weekday_price - this.selectedPromo
     });
     window.addEventListener("popstate", function() {
       handler.close();
-      window.location.href='/home';
     });
 
     this.paymentInfo.schedule_id = this.id1;
     this.paymentInfo.seat_id = this.selectedSeat;
     this.paymentInfo.quantity = 1;
-    this.paymentInfo.total_price = this.pricingInfo[0].weekday_price;
+    this.paymentInfo.total_price = this.pricingInfo[0].weekday_price - this.selectedPromo;
     this.paymentInfo.promo_id = this.selectedPromo;
 
     // console.log(paymentInfo);
@@ -147,6 +145,7 @@ export class MovieComponent implements OnInit {
 
   selectPromo(e) {
     this.selectedPromo = e.target.value;
+    console.log(this.selectedPromo);
   }
 
 }
