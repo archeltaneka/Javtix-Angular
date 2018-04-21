@@ -37,7 +37,9 @@
                     <option *ngFor="let city of cinemaData" [value]="city.city">{{city.city}}</option>
                   </select>
                 <br><br>
-                <input type="submit" value="Submit" name="Submit" style="color:black; width:7%; position:relative; left:47%; background-color: grey; border: 2px solid black">
+                <button type="submit">
+                    <span class="glyphicon glyphicon-ok" style="color: black"></span>
+                </button>
             </form>
         </div>
         <div id="LogIn" class="tabcontent">
@@ -49,7 +51,9 @@
                 <h5>Password</h5>
                 <input type="password" [(ngModel)]="model.password" [ngModelOptions]="{standalone: true}" name="password" require>
                 <br><br>
-                <input type="submit" value="Submit" name="Submit" style="color:black; width:7%; position:relative; left:47%; background-color: grey; border: 2px solid black">
+                <button type="submit">
+                    <span class="glyphicon glyphicon-ok" style="color: black"></span>
+                </button>
             </form>
         </div>
     </div>

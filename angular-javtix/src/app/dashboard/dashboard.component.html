@@ -1,34 +1,92 @@
-<body style="background-color: #2A363B"> 
-    <br> 
+<body style="background-color: #2A363B" onload="tabbed(event, 'dashboard');">
     <br>
-    <div align="center" style="width:50%; background-color:aliceblue; color:#2A363B; margin:0 auto;"> 
-        <br> 
-        <h3 style="text-align:center;">Dashboard</h3>
-        <hr style="height:5px;width:95%;border:none;color:#2A363B;background-color:#2A363B;border-color:#2A363B"> 
-        <form method="post" onclick="save()">
-            <h5><b>--Name--</b></h5>
-            <input type="text" id="profile" name="name" [(ngModel)]="model.name" disabled>
-            <button onclick="edit('name')"><span class="glyphicon glyphicon-pencil"></span></button>
-            <br><br>
-            <h5><b>--Birthday--</b></h5> 
-            <input type="date" id="profile" name="birthDate" [(ngModel)]="model.birthDate"  disabled>
-            <button onclick="edit('birthDate')"><span class="glyphicon glyphicon-pencil"></span></button>
-            <br><br>
-            <h5><b>--City--</b></h5> 
-            <input type="text" id="profile" name="city" [(ngModel)]="model.city"  disabled>
-            <button onclick="edit('city')"><span class="glyphicon glyphicon-pencil"></span></button>
-            <br><br>
-            <h5><b>--Phone Number--</b></h5>
-            <input type="tel" id="profile" name="phoneNumber" [(ngModel)]="model.phoneNumber"  disabled>
-            <button onclick="edit('phoneNumber')"><span class="glyphicon glyphicon-pencil"></span></button>
-            <br><br>
-            <h5><b>--Email--</b></h5> 
-            <input type="email" id="profile" name="email" [(ngModel)]="model.email"  disabled>
-            <button onclick="edit('email')"><span class="glyphicon glyphicon-pencil"></span></button>
-            <br> 
-            <br> 
-            <input type="submit">
-            </div>        
-        </form>
-    </div>
-</body> 
+    <br>
+    <div style="color:aliceblue; width:80%; position:relative; margin:auto">
+        <div class="tab" style="text-align:center">
+            <button class="tablinks" onclick="tabbed(event, 'dashboard')" style="color: black">Dashboard</button>
+            <button class="tablinks" onclick="tabbed(event, 'edit')" style="color: black">Edit</button>
+        </div>
+        <div id="dashboard" class="tabcontent" style="background-color: #2A363B">
+            <h3>Dashboard</h3>
+            <hr>
+            <form method="post">
+            <fieldset id="profile" style="border: none" disabled>
+                <h5>
+                    <b>--Name--</b>
+                </h5>
+                <input type="text" id="profileA" name="name" [(ngModel)]="model.name">
+                <br>
+                <br>
+                <h5>
+                    <b>--Birthday--</b>
+                </h5>
+                <input type="date" id="profileB" name="birthDate" [(ngModel)]="model.birthDate">
+                <br>
+                <br>
+                <h5>
+                    <b>--City--</b>
+                </h5>
+                <input type="text" id="profileC" name="city" [(ngModel)]="model.city">
+                <br>
+                <br>
+                <h5>
+                    <b>--Phone Number--</b>
+                </h5>
+                <input type="tel" id="profileD" name="phoneNumber" [(ngModel)]="model.phoneNumber">
+                <br>
+                <br>
+                <h5>
+                    <b>--Email--</b>
+                </h5>
+                <input type="email" id="profileE" name="email" [(ngModel)]="model.email">
+                <br>
+                <br>
+            </fieldset>
+            </form>
+        </div>
+        <div id="edit" class="tabcontent" style="background-color: #2A363B">
+            <h3>Edit</h3>
+            <hr>
+            <form method="post" onclick="save()">
+                <fieldset id="profile" style="border: none">
+                    <h5>
+                        <b>--Name--</b>
+                    </h5>
+                    <input type="text" name="name" [(ngModel)]="model.name">
+                    <br>
+                    <br>
+                    <h5>
+                        <b>--Birthday--</b>
+                    </h5>
+                    <input type="date" name="birthDate" [(ngModel)]="model.birthDate">
+                    <br>
+                    <br>
+                    <h5>
+                        <b>--City--</b>
+                    </h5>
+                    <input type="text" name="city" [(ngModel)]="model.city">
+                    <br>
+                    <br>
+                    <h5>
+                        <b>--Phone Number--</b>
+                    </h5>
+                    <input type="tel" name="phoneNumber" [(ngModel)]="model.phoneNumber">
+                    <br>
+                    <br>
+                    <h5>
+                        <b>--Email--</b>
+                    </h5>
+                    <input type="email" name="email" [(ngModel)]="model.email">
+                    <br>
+                    <br>
+                    <button type="submit">
+                        <span class="glyphicon glyphicon-pencil" style="color: black"></span>
+                    </button>
+                    <br>
+                    <br>
+                </fieldset>
+            </form>
+        </div>
+    </div>    
+</body>
+

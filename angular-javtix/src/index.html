@@ -43,46 +43,32 @@
   }
   </script>
   <script>
-    function edit(nameType) {
-      document.getElementById("profile").disabled = false;
-      if (nameType == 'name') {
-        if (!nameType.value.match(/^[0-9a-z]+$/)) {
-          alert("Please input alphanumeric only.");
-          return false;
-        }
+    var name = document.getElementsByName('name').value;
+    var dateString = document.getElementsByName('birthDate').value;
+    var myDate = new Date(dateString);
+    var today = new Date();
+    var city = document.getElementsByName('city').value;
+    var phoneNumber = document.getElementsByName('phoneNumber').value;
+    function save() {
+      if (!name.match(/^[0-9a-z]+$/)) {
+        alert("Please input alphanumeric only.");
+        return false;
       }
-      else if (nameType == 'birthDate'){
-        var dateString = document.getElementsByName('birthDate').value;
-        var myDate = new Date(dateString);
-        var today = new Date();
-        if (myDate > today) {
-          alert('You cannot enter a date in the future!');
-          return false;
-        }
+      if (myDate > today) {
+        alert('You cannot enter a date in the future!');
+        return false;
       }
-      else if (nameType == 'city'){
-        if (!nameType.value.match(/^[0-9a-z]+$/)) {
-          alert("Please input alphanumeric only.");
-          return false;
-        }
+      if (!city.match(/^[0-9a-z]+$/)) {
+        alert("Please input alphanumeric only.");
+        return false;
       }
-      else if (nameType == 'phoneNumber') {
-        if (isNaN(nameType.value)) {
-          alert("Please input number only.");
-          return false;
-        }        
-      }  
-      else {
-
+      if (isNaN(phoneNumber)) {
+        alert("Please input number only.");
+        return false;
       }
       return true;
     }
   </script>
-  <script>
-    function save()
-    {
-      document.getElementById("profile").disabled = true;
-    }
   </script>
   <script>
     $(function() {
