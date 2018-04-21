@@ -54,9 +54,11 @@ export class AllService {
   	return this.httpClient.post(url, signin, this.header).map(
   		res=> {
 	  		response = res;
-	  		console.log(response);
+	  		// console.log(response);
 
 	  		localStorage.setItem('response', JSON.stringify(response));
+        localStorage.setItem('success', JSON.stringify(response['success']));
+        console.log(localStorage.getItem('success'));
 	  		this.name = response['data']['user']['name'];
 	  		this.userId = response['data']['user']['id'];
 
@@ -128,6 +130,10 @@ export class AllService {
 
   getPrice() {
     return this.http.get('http://localhost:8000/api/pricing').map(res=>res.json());
+  }
+
+  getPromoValue(pid) {
+    return this.http.get('http://localhost:8000/api/promoval/' + pid).map(res=>res.json());
   }
 
 }

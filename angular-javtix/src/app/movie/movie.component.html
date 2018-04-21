@@ -89,7 +89,7 @@
                 <h4>Promo Available</h4> 
                 <select style="color:black" (change)="selectPromo($event)">
                     <option style="color:grey" disabled selected>Select</option>
-                    <option *ngFor="let info of lstOfPromos" [value]="info.value">{{info.name}}</option>
+                    <option *ngFor="let info of lstOfPromos" [value]="info.id">{{info.name}}</option>
                 </select>
                 <br><br>
                 <input type="submit" value="Submit" name="Purchase" id="buy" (click)="purchase()" style="color:black; width:7%; position:absolute; left:46.5%; background-color: grey; border: 2px solid black">

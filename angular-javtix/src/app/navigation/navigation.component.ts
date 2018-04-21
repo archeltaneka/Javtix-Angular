@@ -7,7 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NavigationComponent implements OnInit {
 
-  loggedIn: boolean = false;
+  loggedIn: any = false;
 
   constructor() { }
 

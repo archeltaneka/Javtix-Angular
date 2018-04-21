@@ -1,5 +1,6 @@
 <body style="background-color: #2A363B" onload="tabbed(event, 'dashboard');">
     <br>
+<<<<<<< Updated upstream
     <br>
     <div style="color:aliceblue; width:80%; position:relative; margin:auto">
         <div class="tab" style="text-align:center">
@@ -90,3 +91,39 @@
     </div>    
 </body>
 
+=======
+    <div align="center" style="width:50%; background-color:aliceblue; color:#2A363B; margin:0 auto;"> 
+        <br> 
+        <h3 style="text-align:center;">Dashboard</h3>
+        <hr style="height:5px;width:95%;border:none;color:#2A363B;background-color:#2A363B;border-color:#2A363B"> 
+        <form method="post" onclick="save()">
+            <h5><b>--Name--</b></h5>
+            <input type="text" id="profile" name="name" [(ngModel)]="model.name" disabled>
+            <button onclick="edit('name')"><span class="glyphicon glyphicon-pencil"></span></button>
+            <br><br>
+            <h5><b>--Birthday--</b></h5> 
+            <input type="text" id="profile" name="birthDate" [(ngModel)]="model.birthDate"  disabled>
+            <button onclick="edit('birthDate')"><span class="glyphicon glyphicon-pencil"></span></button>
+            <br><br>
+            <h5><b>--City--</b></h5> 
+            <input type="text" id="profile" name="city" [(ngModel)]="model.city"  disabled>
+            <button onclick="edit('city')"><span class="glyphicon glyphicon-pencil"></span></button>
+            <br><br>
+            <h5><b>--Phone Number--</b></h5>
+            <input type="tel" id="profile" name="phoneNumber" [(ngModel)]="model.phoneNumber"  disabled>
+            <button onclick="edit('phoneNumber')"><span class="glyphicon glyphicon-pencil"></span></button>
+            <br><br>
+            <h5><b>--Email--</b></h5> 
+            <input type="email" id="profile" name="email" [(ngModel)]="model.email"  disabled>
+            <button onclick="edit('email')"><span class="glyphicon glyphicon-pencil"></span></button>
+            <br> 
+            <br> 
+            <div class="text-center"> 
+                <a class="btn btn-primary" role="button" (click)="save()"> 
+                    Save 
+                </a>
+            </div>     
+        </form>
+    </div>
+</body> 
+>>>>>>> Stashed changes
