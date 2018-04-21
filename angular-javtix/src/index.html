@@ -39,19 +39,51 @@
   }
   </script>
   <script>
-    var name = document.getElementsByName('name').value;
-    var dateString = document.getElementsByName('birthDate').value;
+  $(document).ready(function () {
+      $(".profile").hide();
+      $("#select").show();
+      $("#option").change(function () {
+        $('.profile').hide();
+        $('#' + $(this).val()).show();
+      });
+
+    });
+  </script>
+  <script>
+  function disableTxt(id) {
+      document.getElementById(id).disabled = true;
+    }
+  </script>
+  <script>
+  function undisableTxt(id) {
+    document.getElementById(id).disabled = false;
+  }
+  </script>
+  <script>
+    function edit(id) {
+      var btn = document.getElementById(id); 
+      if(btn.disabled == false) {
+        disableTxt(id);
+      }
+      else {
+        undisableTxt(id);
+      }
+    }
+  </script>
+  <script>
+    var name = document.getElementsByName("name").value;
+    var dateString = document.getElementsByName("birthDate").value;
     var myDate = new Date(dateString);
     var today = new Date();
-    var city = document.getElementsByName('city').value;
-    var phoneNumber = document.getElementsByName('phoneNumber').value;
+    var city = document.getElementsByName("city").value;
+    var phoneNumber = document.getElementsByName("phoneNumber").value;
     function save() {
       if (!name.match(/^[0-9a-z]+$/)) {
         alert("Please input alphanumeric only.");
         return false;
       }
       if (myDate > today) {
-        alert('You cannot enter a date in the future!');
+        alert("You cannot enter a date in the future!");
         return false;
       }
       if (!city.match(/^[0-9a-z]+$/)) {
