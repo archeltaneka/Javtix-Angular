@@ -58,12 +58,14 @@ export class HomeComponent implements OnInit {
     this.selectedCity = e.target.value;
   }
 
+  // search movie and schedule based on search functionality
   search() {
     console.log(this.selectedMovie);
     console.log(this.selectedCity);
     this.router.navigate([`/movie/${this.selectedMovie}/${this.selectedCity}`]);
   }
 
+  // if user does not use the search function, the movie schedule will be automatically based on Jakarta
   movieClick(mid: any) {
     console.log(mid);
     this.router.navigate([`/movie/${mid}/Jakarta`]);

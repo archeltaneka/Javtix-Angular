@@ -11,6 +11,7 @@ export class AuthGuard implements CanActivate {
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
 
+    // if user does not logged in, redirect to login page
   	if(localStorage.getItem('response')) {
   		return true;
   	}

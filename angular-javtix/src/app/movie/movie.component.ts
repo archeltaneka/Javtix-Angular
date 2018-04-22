@@ -45,7 +45,7 @@ export class MovieComponent implements OnInit {
   		this.http.get(`https://api.javtix.me/api/movie?id=${res['id']}`).subscribe(res2=>{
   			this.mov = res2;
   		})
-      //get schedule
+      //get schedule depends on movie and city selected
       this.http.get(`https://api.javtix.me/api/schedule?id=${res['id']}&city=${res['city']}`).subscribe(res3=>{
         this.movieInfo = res3;
         for(let t of this.movieInfo){
@@ -58,6 +58,7 @@ export class MovieComponent implements OnInit {
         this.error = error.statusText;
       });
   	});
+    //get all promo available
     this.service.getAllPromos().subscribe(
       all=>{
         this.lstOfPromos = all;
@@ -67,6 +68,7 @@ export class MovieComponent implements OnInit {
     );
   }
 
+  // fake(unanonymous function) for stripe checkout
   faker(tokens : any) {
       this.paymentInfo['stripeToken'] = tokens.id;
       this.paymentInfo.stripeEmail = tokens.email;
@@ -74,7 +76,7 @@ export class MovieComponent implements OnInit {
       this.paymentInfo.stripeTokenType = 'card';
       console.log(this.paymentInfo);
       window.setTimeout(function(){ window.location.href='/home'; }, 3600);
-      
+
       this.service.buyTicket(this.paymentInfo).subscribe(
         res=>{
           console.log(res);
@@ -83,6 +85,7 @@ export class MovieComponent implements OnInit {
       );
     }
 
+  // function upon clicking submit button for payment
   purchase() {
     var flag: boolean;
     var handler = (<any>window).StripeCheckout.configure({
@@ -106,6 +109,7 @@ export class MovieComponent implements OnInit {
     console.log(this.paymentInfo.total_price);
   }
 
+  // after selecting the theatre, the time also will be shown corresponding to the selected theatre
   selectTheatre(e){
     this.selectedTheatre = e.target.value;
     for(let t of this.movieInfo){
@@ -115,6 +119,7 @@ export class MovieComponent implements OnInit {
     }
   }
 
+  // seats will be also shown corresponding to the schedule/time selected
   selectTime(e){
     this.selectedTime = e.target.value;
     for(let t of this.movieInfo){
@@ -132,6 +137,7 @@ export class MovieComponent implements OnInit {
     );
   }
 
+  // get the id of the seat
   selectSeat(e) {
     this.selectedSeat = e.target.value;
     console.log(this.selectedSeat);
@@ -144,6 +150,7 @@ export class MovieComponent implements OnInit {
     );
   }
 
+  // get the value of the promo
   selectPromo(e) {
     this.selectedPromo = e.target.value;
     this.service.getPromoValue(this.selectedPromo).subscribe(
