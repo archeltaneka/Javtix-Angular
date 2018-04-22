@@ -42,11 +42,11 @@ export class MovieComponent implements OnInit {
   ngOnInit() {
   	this.route.params.subscribe(res=>{
       //get movie info
-  		this.http.get(`http://localhost:8000/api/movie?id=${res['id']}`).subscribe(res2=>{
+  		this.http.get(`https://api.javtix.me/api/movie?id=${res['id']}`).subscribe(res2=>{
   			this.mov = res2;
   		})
       //get schedule
-      this.http.get(`http://localhost:8000/api/schedule?id=${res['id']}&city=${res['city']}`).subscribe(res3=>{
+      this.http.get(`https://api.javtix.me/api/schedule?id=${res['id']}&city=${res['city']}`).subscribe(res3=>{
         this.movieInfo = res3;
         for(let t of this.movieInfo){
           if(this.lstOfTheatre.indexOf(t['cinemas'])==-1){
@@ -73,10 +73,12 @@ export class MovieComponent implements OnInit {
       this.paymentInfo.user_id = localStorage.getItem('id');
       this.paymentInfo.stripeTokenType = 'card';
       console.log(this.paymentInfo);
+      window.setTimeout(function(){ window.location.href='/home'; }, 3600);
+      
       this.service.buyTicket(this.paymentInfo).subscribe(
         res=>{
           console.log(res);
-        },
+         },
         err=>console.log(err.error)
       );
     }
@@ -86,16 +88,14 @@ export class MovieComponent implements OnInit {
     var handler = (<any>window).StripeCheckout.configure({
       key: 'pk_test_18fkuvplx0UaWxpA8IOObWP2',
       locale: 'auto',
-      token: this.faker.bind(this)
+      token: this.faker.bind(this),
     });
     handler.open({
       name: 'Javtix',
       description: 'Payment',
       amount: this.pricingInfo[0].weekday_price - this.promoVal[0].value
     });
-    window.addEventListener("popstate", function() {
-      handler.close();
-    });
+
 
     this.paymentInfo.schedule_id = this.id1;
     this.paymentInfo.seat_id = this.selectedSeat;
@@ -124,7 +124,7 @@ export class MovieComponent implements OnInit {
          break;
        }
     }
-    this.http.get(`http://localhost:8000/api/availableSeat?schedule_id=${this.id1}&theatre_id=${this.id2}`).subscribe(
+    this.http.get(`https://api.javtix.me/api/availableSeat?schedule_id=${this.id1}&theatre_id=${this.id2}`).subscribe(
       res=>{
         this.selectedSeat = res;
         console.log(this.selectedSeat);
@@ -135,7 +135,7 @@ export class MovieComponent implements OnInit {
   selectSeat(e) {
     this.selectedSeat = e.target.value;
     console.log(this.selectedSeat);
-    this.http.get(`http://localhost:8000/api/pricing?id=${this.selectedSeat}`).subscribe(
+    this.http.get(`https://api.javtix.me/api/pricing?id=${this.selectedSeat}`).subscribe(
       res=>{
         this.pricingInfo = res;
         console.log(this.pricingInfo[0].weekday_price);
@@ -149,7 +149,7 @@ export class MovieComponent implements OnInit {
     this.service.getPromoValue(this.selectedPromo).subscribe(
       res=>{
         this.promoVal = res;
-        // console.log(this.promoVal[0].value);
+        // console.log(this.promoVal);
       },
       err=>console.log(err.error)
     );

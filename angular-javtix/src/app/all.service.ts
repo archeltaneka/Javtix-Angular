@@ -40,7 +40,7 @@ export class AllService {
   constructor(private http: Http, private httpClient: HttpClient, private router: Router) { }
 
   signUpService(signup: Signup) {
-  	let url = 'http://localhost:8000/api/register';
+  	let url = 'https://api.javtix.me/api/register';
   	this.httpClient.post(url, signup, this.header).subscribe(
   		res => console.log("Register success!"),
   		err => console.log(err.error)
@@ -49,7 +49,7 @@ export class AllService {
 
   signinService(signin: Signin) {
   	let response: any = {};
-  	let url = 'http://localhost:8000/api/login';
+  	let url = 'https://api.javtix.me/api/login';
 
   	return this.httpClient.post(url, signin, this.header).map(
   		res=> {
@@ -73,7 +73,7 @@ export class AllService {
 
   buyTicket(transaction: any) {
     let response: any = {};
-    let url = 'http://localhost:8000/api/purchases';
+    let url = 'https://api.javtix.me/api/purchases';
 
     return this.httpClient.post(url, transaction, this.header).map(
       res => {
@@ -85,55 +85,55 @@ export class AllService {
   }
 
   getProfile(id:string) {
-    let url = 'http://localhost:8000/api/customer/'+id;
+    let url = 'https://api.javtix.me/api/customer/'+id;
 
     return this.httpClient.get(url, this.header);
   }
 
   updateProfile(profile: Profile) {
-  	let url = 'http://localhost:8000/api/customer/' + profile.id;
+  	let url = 'https://api.javtix.me/api/customer/' + profile.id;
     console.log(profile);
   	return this.httpClient.put(url, profile, this.header);
   }
 
   getAllSchedules() {
-  	return this.http.get('http://localhost:8000/api/schedule').map(res=>res.json());
+  	return this.http.get('https://api.javtix.me/api/schedule').map(res=>res.json());
   }
 
   getAllCinemas() {
-  	return this.http.get('http://localhost:8000/api/cinema').map(res=>res.json());
+  	return this.http.get('https://api.javtix.me/api/cinema').map(res=>res.json());
   }
 
   getAllNowPlayingMovies() {
-    return this.http.get('http://localhost:8000/api/movie/nowplaying').map(res=>res.json());
+    return this.http.get('https://api.javtix.me/api/movie/nowplaying').map(res=>res.json());
   }
 
   getAllComingSoonMovies() {
-  	return this.http.get('http://localhost:8000/api/movie/comingsoon').map(res=>res.json());
+  	return this.http.get('https://api.javtix.me/api/movie/comingsoon').map(res=>res.json());
   }
 
   getMovieFromSearch(mov: any) {
-  	return this.http.get('https://localhost:8000/api/movie/' + mov.id).map(res=>res.json());
+  	return this.http.get('https://api.javtix.me/api/movie/' + mov.id).map(res=>res.json());
   }
 
   getAllCities() {
-  	return this.http.get('http://localhost:8000/api/city').map(res=>res.json());
+  	return this.http.get('https://api.javtix.me/api/city').map(res=>res.json());
   }
 
   getAllSeats(tid: any) {
-    return this.http.get('http://lcoalhost:8000/api/all_seats/' + tid.id).map(res=>res.json());
+    return this.http.get('https://api.javtix.me/api/all_seats/' + tid.id).map(res=>res.json());
   }
 
   getAllPromos() {
-    return this.http.get('http://localhost:8000/api/promo').map(res=>res.json());
+    return this.http.get('https://api.javtix.me/api/promo').map(res=>res.json());
   }
 
   getPrice() {
-    return this.http.get('http://localhost:8000/api/pricing').map(res=>res.json());
+    return this.http.get('https://api.javtix.me/api/pricing').map(res=>res.json());
   }
 
   getPromoValue(pid) {
-    return this.http.get('http://localhost:8000/api/promoval/' + pid).map(res=>res.json());
+    return this.http.get('https://api.javtix.me/api/promoval/' + pid).map(res=>res.json());
   }
 
 }

@@ -32,7 +32,7 @@ export class UserComponent implements OnInit {
 
   register() {
   	this.allService.signUpService(this.signup);
-  	console.log(this.signup);
+  	// console.log(this.signup);
   	alert("Register success! Please check your email for verification");
   }
 
