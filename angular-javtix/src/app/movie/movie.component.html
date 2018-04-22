@@ -1,13 +1,37 @@
 <body>
 	<div style="color:aliceblue"> 
+        <br>
+        <br>
         <table cellspacing="10" style="position:relative; left:25%"> 
             <tr> 
                 <td> 
                     <img src="{{ mov[0].image_url }}"> 
-                </td> 
-                <td> 
-                    <iframe width="500" height="350" src="https://www.youtube.com/embed/KpFMVcZ4o7U"> 
-                    </iframe> 
+                </td>
+                <td *ngIf="{ a: mov[0].movie_name } as variable">
+                    <div *ngIf="variable.a == 'Blade Runner'">
+                        <iframe width="500" height="350" src="https://www.youtube.com/embed/gCcx85zbxz4" frameborder="0" allow="autoplay; encrypted-media"
+                            allowfullscreen></iframe>
+                    </div>
+                    <div *ngIf="variable.a == 'Fight Club'">
+                        <iframe width="500" height="350" src="https://www.youtube.com/embed/BdJKm16Co6M" frameborder="0" allow="autoplay; encrypted-media"
+                            allowfullscreen></iframe>
+                    </div>
+                    <div *ngIf="variable.a == 'Hangover'">
+                        <iframe width="500" height="350" src="https://www.youtube.com/embed/tcdUhdOlz9M" frameborder="0" allow="autoplay; encrypted-media"
+                            allowfullscreen></iframe>
+                    </div>
+                    <div *ngIf="variable.a == 'The Greatest Showman'">
+                        <iframe width="500" height="350" src="https://www.youtube.com/embed/AXCTMGYUg9A" frameborder="0" allow="autoplay; encrypted-media"
+                            allowfullscreen></iframe>
+                    </div>
+                    <div *ngIf="variable.a == 'Logan'">
+                        <iframe width="500" height="350" src="https://www.youtube.com/embed/Div0iP65aZo" frameborder="0" allow="autoplay; encrypted-media"
+                            allowfullscreen></iframe>
+                    </div>
+                    <div *ngIf="variable.a == 'Maleficent'">
+                        <iframe width="500" height="350" src="https://www.youtube.com/embed/w-XO4XiRop0" frameborder="0" allow="autoplay; encrypted-media"
+                            allowfullscreen></iframe>
+                    </div>
                 </td> 
             </tr> 
         </table> 
