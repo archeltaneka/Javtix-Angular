@@ -47,6 +47,7 @@ export class UserComponent implements OnInit {
   	);
   }
 
+  // show all cities and cinemas for registration
   ngOnInit() {
   	this.signup = new Signup();
   	this.model = new Signin();

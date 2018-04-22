@@ -39,6 +39,8 @@ export class AllService {
 
   constructor(private http: Http, private httpClient: HttpClient, private router: Router) { }
 
+  /* REST API */
+  
   signUpService(signup: Signup) {
   	let url = 'https://api.javtix.me/api/register';
   	this.httpClient.post(url, signup, this.header).subscribe(
