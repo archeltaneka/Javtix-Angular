@@ -54,6 +54,7 @@ var AllService = /** @class */ (function () {
             headers: new __WEBPACK_IMPORTED_MODULE_2__angular_common_http__["c" /* HttpHeaders */]({ 'Content-Type': 'application/json' })
         };
     }
+    /* REST API */
     AllService.prototype.signUpService = function (signup) {
         var url = 'https://api.javtix.me/api/register';
         this.httpClient.post(url, signup, this.header).subscribe(function (res) { return console.log("Register success!"); }, function (err) { return console.log(err.error); });
@@ -333,6 +334,7 @@ var AuthGuard = /** @class */ (function () {
         this.router = router;
     }
     AuthGuard.prototype.canActivate = function (next, state) {
+        // if user does not logged in, redirect to login page
         if (localStorage.getItem('response')) {
             return true;
         }
@@ -492,11 +494,13 @@ var HomeComponent = /** @class */ (function () {
     HomeComponent.prototype.changeCity = function (e) {
         this.selectedCity = e.target.value;
     };
+    // search movie and schedule based on search functionality
     HomeComponent.prototype.search = function () {
         console.log(this.selectedMovie);
         console.log(this.selectedCity);
         this.router.navigate(["/movie/" + this.selectedMovie + "/" + this.selectedCity]);
     };
+    // if user does not use the search function, the movie schedule will be automatically based on Jakarta
     HomeComponent.prototype.movieClick = function (mid) {
         console.log(mid);
         this.router.navigate(["/movie/" + mid + "/Jakarta"]);
@@ -526,7 +530,7 @@ module.exports = ""
 /***/ "./src/app/movie/movie.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<body>\r\n\t<div style=\"color:aliceblue\"> \r\n        <table cellspacing=\"10\" style=\"position:relative; left:25%\"> \r\n            <tr> \r\n                <td> \r\n                    <img src=\"{{ mov[0].image_url }}\"> \r\n                </td> \r\n                <td> \r\n                    <iframe width=\"500\" height=\"350\" src=\"https://www.youtube.com/embed/KpFMVcZ4o7U\"> \r\n                    </iframe> \r\n                </td> \r\n            </tr> \r\n        </table> \r\n        <br> \r\n        <table style=\"position:relative; left:25%; color:aliceblue\"> \r\n            <tr> \r\n                <td style=\"width:750px\"> \r\n                \t<h2>{{ mov[0].movie_name }}</h2>\r\n                \t<br>\r\n                    {{ mov[0].synopsis }}\r\n                    <br>\r\n                    <br>\r\n                    Director: {{ mov[0].director }}\r\n                    <br>\r\n                    Stars: {{ mov[0].casts }}\r\n                    <br>\r\n                    <br>\r\n                    Duration: {{ mov[0].duration }} minutes\r\n                    <br>\r\n                    Rating: {{ mov[0].rating }}\r\n                </td> \r\n            </tr> \r\n        </table> \r\n        <h2 id=\"schedule\" style=\"text-align:center\">Schedule</h2> \r\n        <hr> \r\n        <div class=\"row\" style=\"width:100%\" align=\"center\"> \r\n            <div class=\"col-sm-6\"> \r\n                <table style=\"color:aliceblue\"> \r\n                    <tr> \r\n                        <th style=\"text-align:center\"> \r\n                            <h3>Time</h3> \r\n                        </th> \r\n                    </tr> \r\n                    <tr> \r\n                        <td style=\"text-align:center\">\r\n                            <ul>\r\n                                <li *ngFor=\"let info of movieInfo\">{{info.time}}</li>\r\n                            </ul>\r\n                        </td> \r\n                    </tr> \r\n                </table> \r\n            </div>\r\n            <div class=\"col-sm-6\"> \r\n                <table style=\"color:aliceblue\"> \r\n                    <tr> \r\n                        <th style=\"text-align:center\"> \r\n                            <h3>Place</h3> \r\n                        </th> \r\n                    </tr> \r\n                    <tr> \r\n                        <td style=\"text-align:center\"> \r\n                            <ul>\r\n                                <li *ngFor=\"let info of movieInfo\">{{info.cinemas}}</li>\r\n                            </ul>\r\n                        </td> \r\n                    </tr> \r\n                </table> \r\n            </div>\r\n        </div> \r\n        <div style=\"text-align:center\"> \r\n            <h3>Interested?</h3>\r\n            <form method=\"post\" (submit)=\"purchase()\">\r\n                <h5>Select Theatre</h5> \r\n                <select style=\"color:black\" (change)=\"selectTheatre($event)\"> \r\n                    <option style=\"color:grey\" disabled selected>Select</option> \r\n                    <option *ngFor=\"let info of lstOfTheatre\">{{info}}</option>\r\n                </select> \r\n                <h5>Select Time</h5> \r\n                <select style=\"color:black\" (change)=\"selectTime($event)\"> \r\n                    <option style=\"color:grey\" disabled selected>Select</option> \r\n                    <option *ngFor=\"let info of lstOfTime\">{{info}}</option>\r\n                </select>\r\n                <h4>Seats</h4> \r\n                <select style=\"color:black\" (change)=\"selectSeat($event)\">\r\n                    <option style=\"color:grey\" disabled selected>Select</option>\r\n                    <option *ngFor=\"let info of selectedSeat\" [value]=\"info['id']\">{{info['seat_number']}}</option>\r\n                </select>\r\n                <br>\r\n                <h4>Promo Available</h4> \r\n                <select style=\"color:black\" (change)=\"selectPromo($event)\">\r\n                    <option style=\"color:grey\" disabled selected>Select</option>\r\n                    <option *ngFor=\"let info of lstOfPromos\" [value]=\"info.id\">{{info.name}}</option>\r\n                </select>\r\n                <br><br>\r\n                <input type=\"submit\" value=\"Submit\" name=\"Purchase\" id=\"buy\" (click)=\"purchase()\" style=\"color:black; width:7%; position:absolute; left:46.5%; background-color: grey; border: 2px solid black\">\r\n            </form> \r\n        </div> \r\n    </div> \r\n    <br> \r\n    <footer> \r\n    </footer> \r\n</body>"
+module.exports = "<body>\r\n\t<div style=\"color:aliceblue\"> \r\n        <br>\r\n        <br>\r\n        <table cellspacing=\"10\" style=\"position:relative; left:25%\"> \r\n            <tr> \r\n                <td> \r\n                    <img src=\"{{ mov[0].image_url }}\"> \r\n                </td>\r\n                <td *ngIf=\"{ a: mov[0].movie_name } as variable\">\r\n                    <div *ngIf=\"variable.a == 'Blade Runner'\">\r\n                        <iframe width=\"500\" height=\"350\" src=\"https://www.youtube.com/embed/gCcx85zbxz4\" frameborder=\"0\" allow=\"autoplay; encrypted-media\"\r\n                            allowfullscreen></iframe>\r\n                    </div>\r\n                    <div *ngIf=\"variable.a == 'Fight Club'\">\r\n                        <iframe width=\"500\" height=\"350\" src=\"https://www.youtube.com/embed/BdJKm16Co6M\" frameborder=\"0\" allow=\"autoplay; encrypted-media\"\r\n                            allowfullscreen></iframe>\r\n                    </div>\r\n                    <div *ngIf=\"variable.a == 'Hangover'\">\r\n                        <iframe width=\"500\" height=\"350\" src=\"https://www.youtube.com/embed/tcdUhdOlz9M\" frameborder=\"0\" allow=\"autoplay; encrypted-media\"\r\n                            allowfullscreen></iframe>\r\n                    </div>\r\n                    <div *ngIf=\"variable.a == 'The Greatest Showman'\">\r\n                        <iframe width=\"500\" height=\"350\" src=\"https://www.youtube.com/embed/AXCTMGYUg9A\" frameborder=\"0\" allow=\"autoplay; encrypted-media\"\r\n                            allowfullscreen></iframe>\r\n                    </div>\r\n                    <div *ngIf=\"variable.a == 'Logan'\">\r\n                        <iframe width=\"500\" height=\"350\" src=\"https://www.youtube.com/embed/Div0iP65aZo\" frameborder=\"0\" allow=\"autoplay; encrypted-media\"\r\n                            allowfullscreen></iframe>\r\n                    </div>\r\n                    <div *ngIf=\"variable.a == 'Maleficent'\">\r\n                        <iframe width=\"500\" height=\"350\" src=\"https://www.youtube.com/embed/w-XO4XiRop0\" frameborder=\"0\" allow=\"autoplay; encrypted-media\"\r\n                            allowfullscreen></iframe>\r\n                    </div>\r\n                </td> \r\n            </tr> \r\n        </table> \r\n        <br> \r\n        <table style=\"position:relative; left:25%; color:aliceblue\"> \r\n            <tr> \r\n                <td style=\"width:750px\"> \r\n                \t<h2>{{ mov[0].movie_name }}</h2>\r\n                \t<br>\r\n                    {{ mov[0].synopsis }}\r\n                    <br>\r\n                    <br>\r\n                    Director: {{ mov[0].director }}\r\n                    <br>\r\n                    Stars: {{ mov[0].casts }}\r\n                    <br>\r\n                    <br>\r\n                    Duration: {{ mov[0].duration }} minutes\r\n                    <br>\r\n                    Rating: {{ mov[0].rating }}\r\n                </td> \r\n            </tr> \r\n        </table> \r\n        <h2 id=\"schedule\" style=\"text-align:center\">Schedule</h2> \r\n        <hr> \r\n        <div class=\"row\" style=\"width:100%\" align=\"center\"> \r\n            <div class=\"col-sm-6\"> \r\n                <table style=\"color:aliceblue\"> \r\n                    <tr> \r\n                        <th style=\"text-align:center\"> \r\n                            <h3>Time</h3> \r\n                        </th> \r\n                    </tr> \r\n                    <tr> \r\n                        <td style=\"text-align:center\">\r\n                            <ul>\r\n                                <li *ngFor=\"let info of movieInfo\">{{info.time}}</li>\r\n                            </ul>\r\n                        </td> \r\n                    </tr> \r\n                </table> \r\n            </div>\r\n            <div class=\"col-sm-6\"> \r\n                <table style=\"color:aliceblue\"> \r\n                    <tr> \r\n                        <th style=\"text-align:center\"> \r\n                            <h3>Place</h3> \r\n                        </th> \r\n                    </tr> \r\n                    <tr> \r\n                        <td style=\"text-align:center\"> \r\n                            <ul>\r\n                                <li *ngFor=\"let info of movieInfo\">{{info.cinemas}}</li>\r\n                            </ul>\r\n                        </td> \r\n                    </tr> \r\n                </table> \r\n            </div>\r\n        </div> \r\n        <div style=\"text-align:center\"> \r\n            <h3>Interested?</h3>\r\n            <form method=\"post\" (submit)=\"purchase()\">\r\n                <h5>Select Theatre</h5> \r\n                <select style=\"color:black\" (change)=\"selectTheatre($event)\"> \r\n                    <option style=\"color:grey\" disabled selected>Select</option> \r\n                    <option *ngFor=\"let info of lstOfTheatre\">{{info}}</option>\r\n                </select> \r\n                <h5>Select Time</h5> \r\n                <select style=\"color:black\" (change)=\"selectTime($event)\"> \r\n                    <option style=\"color:grey\" disabled selected>Select</option> \r\n                    <option *ngFor=\"let info of lstOfTime\">{{info}}</option>\r\n                </select>\r\n                <h4>Seats</h4> \r\n                <select style=\"color:black\" (change)=\"selectSeat($event)\">\r\n                    <option style=\"color:grey\" disabled selected>Select</option>\r\n                    <option *ngFor=\"let info of selectedSeat\" [value]=\"info['id']\">{{info['seat_number']}}</option>\r\n                </select>\r\n                <br>\r\n                <h4>Promo Available</h4> \r\n                <select style=\"color:black\" (change)=\"selectPromo($event)\">\r\n                    <option style=\"color:grey\" disabled selected>Select</option>\r\n                    <option *ngFor=\"let info of lstOfPromos\" [value]=\"info.id\">{{info.name}}</option>\r\n                </select>\r\n                <br><br>\r\n                <input type=\"submit\" value=\"Submit\" name=\"Purchase\" id=\"buy\" (click)=\"purchase()\" style=\"color:black; width:7%; position:absolute; left:46.5%; background-color: grey; border: 2px solid black\">\r\n            </form> \r\n        </div> \r\n    </div> \r\n    <br> \r\n    <footer> \r\n    </footer> \r\n</body>"
 
 /***/ }),
 
@@ -575,7 +579,7 @@ var MovieComponent = /** @class */ (function () {
             _this.http.get("https://api.javtix.me/api/movie?id=" + res['id']).subscribe(function (res2) {
                 _this.mov = res2;
             });
-            //get schedule
+            //get schedule depends on movie and city selected
             _this.http.get("https://api.javtix.me/api/schedule?id=" + res['id'] + "&city=" + res['city']).subscribe(function (res3) {
                 _this.movieInfo = res3;
                 for (var _i = 0, _a = _this.movieInfo; _i < _a.length; _i++) {
@@ -588,11 +592,13 @@ var MovieComponent = /** @class */ (function () {
                 _this.error = error.statusText;
             });
         });
+        //get all promo available
         this.service.getAllPromos().subscribe(function (all) {
             _this.lstOfPromos = all;
             console.log(_this.lstOfPromos);
         }, function (err) { return console.log(err.error); });
     };
+    // fake(unanonymous function) for stripe checkout
     MovieComponent.prototype.faker = function (tokens) {
         this.paymentInfo['stripeToken'] = tokens.id;
         this.paymentInfo.stripeEmail = tokens.email;
@@ -604,6 +610,7 @@ var MovieComponent = /** @class */ (function () {
             console.log(res);
         }, function (err) { return console.log(err.error); });
     };
+    // function upon clicking submit button for payment
     MovieComponent.prototype.purchase = function () {
         var flag;
         var handler = window.StripeCheckout.configure({
@@ -623,6 +630,7 @@ var MovieComponent = /** @class */ (function () {
         this.paymentInfo.promo_id = this.selectedPromo;
         console.log(this.paymentInfo.total_price);
     };
+    // after selecting the theatre, the time also will be shown corresponding to the selected theatre
     MovieComponent.prototype.selectTheatre = function (e) {
         this.selectedTheatre = e.target.value;
         for (var _i = 0, _a = this.movieInfo; _i < _a.length; _i++) {
@@ -632,6 +640,7 @@ var MovieComponent = /** @class */ (function () {
             }
         }
     };
+    // seats will be also shown corresponding to the schedule/time selected
     MovieComponent.prototype.selectTime = function (e) {
         var _this = this;
         this.selectedTime = e.target.value;
@@ -648,6 +657,7 @@ var MovieComponent = /** @class */ (function () {
             console.log(_this.selectedSeat);
         });
     };
+    // get the id of the seat
     MovieComponent.prototype.selectSeat = function (e) {
         var _this = this;
         this.selectedSeat = e.target.value;
@@ -657,6 +667,7 @@ var MovieComponent = /** @class */ (function () {
             console.log(_this.pricingInfo[0].weekday_price);
         }, function (err) { return console.log(err.error); });
     };
+    // get the value of the promo
     MovieComponent.prototype.selectPromo = function (e) {
         var _this = this;
         this.selectedPromo = e.target.value;
@@ -925,6 +936,7 @@ var UserComponent = /** @class */ (function () {
             setTimeout(function () { return window.location.href = "/dashboard"; }, 2000);
         }, function (err) { return console.log(err.error); });
     };
+    // show all cities and cinemas for registration
     UserComponent.prototype.ngOnInit = function () {
         var _this = this;
         this.signup = new __WEBPACK_IMPORTED_MODULE_3__signup__["a" /* Signup */]();
