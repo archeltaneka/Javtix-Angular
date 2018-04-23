@@ -59,11 +59,13 @@ export class AllService {
 	  		// console.log(response);
 
 	  		localStorage.setItem('response', JSON.stringify(response));
-        localStorage.setItem('success', JSON.stringify(response['success']));
+        // localStorage.setItem('success', JSON.stringify(response['success']));
         console.log(localStorage.getItem('success'));
+        this.token = response['data']['success'];
 	  		this.name = response['data']['user']['name'];
 	  		this.userId = response['data']['user']['id'];
 
+        localStorage.setItem('success', this.token);
 	  		localStorage.setItem('name', this.name);
 	  		localStorage.setItem('id', this.userId);
   		},

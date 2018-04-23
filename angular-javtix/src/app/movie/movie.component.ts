@@ -39,7 +39,11 @@ export class MovieComponent implements OnInit {
   id1: any;
   id2: any;
 
+  loggedIn: any = false;
+
   ngOnInit() {
+    this.loggedIn = localStorage.getItem('success') ? true : false;
+
   	this.route.params.subscribe(res=>{
       //get movie info
   		this.http.get(`https://api.javtix.me/api/movie?id=${res['id']}`).subscribe(res2=>{

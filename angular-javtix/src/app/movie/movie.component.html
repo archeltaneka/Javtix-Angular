@@ -91,7 +91,7 @@
                 </table> 
             </div>
         </div> 
-        <div style="text-align:center"> 
+        <div *ngIf="loggedIn" style="text-align:center"> 
             <h3>Interested?</h3>
             <form method="post" (submit)="purchase()">
                 <h5>Select Theatre</h5> 
