@@ -94,6 +94,14 @@ export class AllService {
     return this.httpClient.get(url, this.header);
   }
 
+  getHistory(cid: any) {
+    return this.http.get('https://api.javtix.me/api/purchase-history/' + cid).map(res=>res.json());
+  }
+
+  getSeatMovie(tid: any) {
+    return this.http.get('https://api.javtix.me/api/seatmovie-history/' + tid).map(res=>res.json());
+  }
+
   updateProfile(profile: Profile) {
   	let url = 'https://api.javtix.me/api/customer/' + profile.id;
     console.log(profile);

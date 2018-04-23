@@ -4,7 +4,7 @@
     <div style="color:aliceblue; width:80%; position:relative; margin:auto">
         <div class="tab" style="text-align:center">
             <button class="tablinks" onclick="tabbed(event, 'dashboard')" style="color: black">Dashboard</button>
-            <button class="tablinks" onclick="tabbed(event, 'edit')" style="color: black">Edit</button>
+            <button class="tablinks" onclick="tabbed(event, 'history')" style="color: black">Purchase History</button>
         </div>
         <!-- Display current data -->
         <div id="dashboard" class="tabcontent" style="background-color: #2A363B">
@@ -46,10 +46,75 @@
             </form>
         </div>
         <!-- Also display current data, but pencil button allow edit of current data -->
-        <div id="edit" class="tabcontent" style="background-color: #2A363B">
-            <h3>Edit</h3>
+        <div id="history" class="tabcontent" style="background-color: #2A363B">
+            <h3>Purchase History</h3>
             <hr>
-            <h5 style="text-align: center">If you need any changes, please contact the admin.</h5>
+            <table class='table'>
+                <tr>
+                    <th>Purchase Date</th>
+                    <th>Movie</th>
+                    <th>Theatre</th>
+                    <th>Seat</th>
+                    <th>Price</th>
+                </tr>
+                <tr *ngFor="let history of historyInfo">
+                    <th>{{history.created_at}}</th>
+                    <th>{{history.reserved_seat.schedule.movie.movie_name}}</th>
+                    <th>{{history.reserved_seat.schedule.theatre.theatre_number}}</th>
+                    <th>{{history.reserved_seat.all_seats.seat_number}}</th>
+                    <th>{{history.total_price}}</th>
+                </tr>
+            </table>
+            <!-- <div class="row" style="width:100%" align="center"> 
+            <div class="col-sm-2"> 
+                <table style="color:aliceblue"> 
+                    <tr> 
+                        <th style="text-align:center"> 
+                            <h3>Purchase Date</h3> 
+                        </th> 
+                    </tr> 
+                    <tr> 
+                        <td style="text-align:center">
+                            <ul>
+                                <li *ngFor="let history of historyInfo">{{history.created_at}}</li>
+                            </ul>
+                        </td> 
+                    </tr> 
+                </table> 
+            </div>
+            <div class="col-sm-2"> 
+                <table style="color:aliceblue"> 
+                    <tr> 
+                        <th style="text-align:center"> 
+                            <h3>Payment</h3> 
+                        </th> 
+                    </tr> 
+                    <tr> 
+                        <td style="text-align:center"> 
+                            <ul>
+                                <li *ngFor="let history of historyInfo">{{history.total_price}}</li>
+                            </ul>
+                        </td> 
+                    </tr> 
+                </table> 
+            </div>
+            <div class="col-sm-2"> 
+                <table style="color:aliceblue"> 
+                    <tr> 
+                        <th style="text-align:center"> 
+                            <h3>Movie</h3> 
+                        </th> 
+                    </tr> 
+                    <tr> 
+                        <td style="text-align:center"> 
+                            <ul>
+                                <li *ngFor="let history of historyInfo">{{history.reserved_seat.schedule.movie.movie_name}}</li>
+                            </ul>
+                        </td> 
+                    </tr> 
+                </table> 
+            </div>
+        </div>  -->
         </div>   
     </div>
 </body>

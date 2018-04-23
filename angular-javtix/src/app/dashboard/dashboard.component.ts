@@ -14,8 +14,11 @@ export class DashboardComponent implements OnInit {
   model: any = [];
   userData: any = {};
 
+  historyInfo: any = {};
+
   ngOnInit() {
   	this.showProfile();
+    this.showPurchases();
   }
 
   showProfile() {
@@ -41,6 +44,16 @@ export class DashboardComponent implements OnInit {
         this.showProfile();
       },
       err=>console.log(err.error)
+    );
+  }
+
+  showPurchases() {
+    this.service.getHistory(localStorage.getItem('id')).subscribe(
+      res=> {
+        this.historyInfo = res;
+        console.log(this.historyInfo);
+      },
+      err=> console.log(err.error)
     );
   }
 
